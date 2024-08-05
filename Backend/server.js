@@ -1,5 +1,6 @@
 require("dotenv").config();
 const express = require("express");
+const path = require("path");
 const app = express();
 const mongoose = require("mongoose");
 const userRoute = require("./routes/auth");
@@ -23,6 +24,9 @@ app.use(cors());
 app.use(express.json());
 app.use(express.static("uploads"));
 app.use(bodyParser.json());
+
+app.use("/images", express.static(path.join(__dirname, "uploads/images")));
+
 // Routes
 app.use("/auth", userRoute);
 app.use("/products", productRoute);

@@ -10,11 +10,15 @@ const ProductSlider = ({ currentPage }) => {
   const [products, setProducts] = useState([]);
   const [isDataFetched, setIsDataFetched] = useState(false);
   const [error, setError] = useState(null);
+  const apiUrl = process.env.REACT_APP_API_URL || "http://localhost:5000"; // Default for development
+  console.log("API URL:", apiUrl);
 
   useEffect(() => {
     const getAllProducts = async () => {
       try {
-        const response = await axios.get(`/api/products?page=${currentPage}`);
+        const response = await axios.get(
+          `${apiUrl}/api/products?page=${currentPage}`
+        );
         if (response.data.products && Array.isArray(response.data.products)) {
           setProducts(response.data.products);
           setIsDataFetched(true);
@@ -70,7 +74,8 @@ const ProductSlider = ({ currentPage }) => {
         {products.map((product) => (
           <div className="swiper-slide  " key={product._id}>
             <img
-              src={`/images/${product.photo}`}
+              // src={`/images/${product.photo}`}
+              src={`${apiUrl}/images/${product.photo}`} 
               alt={product.name}
               className=" object-cover w-full h-[350px] transition-transform duration-[150ms]"
             />

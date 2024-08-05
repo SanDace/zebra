@@ -13,7 +13,7 @@ import { CommentContextProvider } from "./User/context/CommentContext";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <AuthContextProvider>
-    <BrowserRouter basename="/Ecommerce">
+    <BrowserRouter>
       <CartContextProvider>
         <CommentContextProvider>
           <App />

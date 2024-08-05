@@ -34,9 +34,9 @@ function App() {
 
   return (
     <Routes>
-      <Route path="/Ecommerce/*" element={<UserPage />} />
-      <Route path="/Ecommerce/admin/*" element={<AdminPage />} />
-      <Route path="/Ecommerce/not-allowed" element={<NotAllowed />} />
+      <Route path="/*" element={<UserPage />} />
+      <Route path="/admin/*" element={<AdminPage />} />
+      <Route path="/not-allowed" element={<NotAllowed />} />
     </Routes>
   );
 }
