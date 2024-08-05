@@ -19,6 +19,7 @@
     "dom-to-image": "^2.6.0",
     "file-saver": "^2.0.5",
     "fuse.js": "^7.0.0",
+    "gh-pages": "^6.1.1",
     "html2canvas": "^1.4.1",
     "jspdf": "^2.5.1",
     "jwt-decode": "^4.0.0",

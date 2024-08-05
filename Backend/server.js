@@ -18,9 +18,7 @@ const purchasedItem = require("./routes/purchasedItem");
 const requireAuth = require("./middleware/requireAuth");
 const cors = require("cors");
 
-app.use(
-  cors()
-);
+app.use(cors());
 // Middleware
 app.use(express.json());
 app.use(express.static("uploads"));
