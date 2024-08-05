@@ -3,6 +3,8 @@ const jwt = require("jsonwebtoken");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const nodemailer = require("nodemailer");
+const bcrypt = require("bcryptjs");
+
 const createToken = (_id) => {
   return jwt.sign({ _id }, process.env.SECRET, { expiresIn: "1D" });
 };
@@ -96,8 +98,6 @@ const sendEmail = async (req, res) => {
     res.status(500).json({ error: "Error checking email" });
   }
 };
-
-const bcrypt = require("bcrypt");
 
 const resetPassword = async (req, res) => {
   const { token, newPassword } = req.body;
