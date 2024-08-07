@@ -10,10 +10,13 @@ const ProductCard = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [isDataFetched, setIsDataFetched] = useState(false);
 
+  const apiUrl = process.env.REACT_APP_API_URL || "http://localhost:5000";
   useEffect(() => {
     const getAllProducts = async () => {
       try {
-        const response = await axios.get(`/api/products?page=${currentPage}`);
+        const response = await axios.get(
+          `  ${apiUrl}/api/products?page=${currentPage}`
+        );
         if (response.data.products && Array.isArray(response.data.products)) {
           setProducts(response.data.products);
           setIsDataFetched(true);
@@ -60,7 +63,7 @@ const ProductCard = () => {
               {" "}
               {/* Maintains a 3:2 aspect ratio */}
               <img
-                src={`/images/${item.photo}`}
+                src={`${apiUrl}/images/${item.photo}`}
                 alt={item.name}
                 className="absolute top-0 left-0 w-full h-full object-cover transition-transform duration-200 group-hover:scale-110"
               />

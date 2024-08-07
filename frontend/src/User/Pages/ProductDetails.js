@@ -25,12 +25,15 @@ const ProductDetails = () => {
   const [showModal, setShowModal] = useState(false);
   const [ratingsUpdated, setRatingsUpdated] = useState(false);
 
+
+  const apiUrl = process.env.REACT_APP_API_URL || "http://localhost:5000";
+
   useEffect(() => {
     setLoading(true);
 
     const fetchProduct = async () => {
       try {
-        const response = await axios.get(`/api/product/${id}`);
+        const response = await axios.get(`${apiUrl}/api/product/${id}`);
         setProduct(response.data);
         setLoading(false);
       } catch (error) {
@@ -55,7 +58,7 @@ const ProductDetails = () => {
     setAddingToCart(true);
 
     try {
-      const response = await axios.post("/api/cart/add", {
+      const response = await axios.post(`${apiUrl}/api/cart/add`, {
         userId: user_id,
         productId: id,
         quantity: 1,
@@ -117,13 +120,13 @@ const ProductDetails = () => {
       <div className="bg-white shadow-lg rounded-lg p-4 flex flex-col md:flex-row">
         <div className="md:w-1/2">
           <div className="hidden md:block">
-            <Magnifier src={`/images/${product.photo}`} />
+            <Magnifier src={`${apiUrl}/images/${product.photo}`} />
           </div>
         </div>
         <div className="md:w-1/2 p-4 flex flex-col">
           <div className="block md:hidden">
             <img
-              src={`/images/${product.photo}`}
+              src={`${apiUrl}/images/${product.photo}`}
               alt={product.name}
               className="h-[250px] lg:h-[350px] w-full object-contain"
             />
