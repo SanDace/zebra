@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import CryptoJS from "crypto-js";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import { Helmet } from "react-helmet";
 
 const PaymentOptions = () => {
   const secretKey = "8gBm/:&EnhH.1/q";
@@ -111,6 +112,9 @@ const PaymentOptions = () => {
 
   return (
     <div className="max-w-md mx-auto bg-white shadow-lg rounded-lg overflow-hidden mt-10">
+          <Helmet>
+        <title>My Page Title</title>
+      </Helmet>
       <div className="bg-gray-600 text-neutral-300 text-center py-3 font-bold text-lg">
         Payment Option
       </div>

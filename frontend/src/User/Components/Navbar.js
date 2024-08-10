@@ -15,7 +15,7 @@ const Navbar = () => {
   const [showDropdown, setShowDropdown] = useState(false);
   const { user } = UseAuthContext();
   const { logout } = UseLogout();
-  const {  cartCount } = useContext(CartContext);
+  const { cartCount } = useContext(CartContext);
   const location = useLocation();
   const [searchData, setSearchData] = useState([]);
   const [query, setQuery] = useState("");
@@ -109,7 +109,7 @@ const Navbar = () => {
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center">
               <Link to="/" className="text-white font-bold text-xl">
-                Your Logo
+                Zebra
               </Link>
             </div>
             <div className="hidden lg:flex lg:items-center lg:space-x-4">

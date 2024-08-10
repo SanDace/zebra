@@ -15,9 +15,14 @@ export const UseLogin = () => {
   const login = async (email, password) => {
     setError(null);
     setIsLoading(true);
+    const apiUrl = process.env.REACT_APP_API_URL; // Default for development
+    console.log(apiUrl);
 
     try {
-      const response = await axios.post("/auth/login", { email, password });
+      const response = await axios.post(`${apiUrl}/auth/login`, {
+        email,
+        password,
+      });
 
       const json = response.data;
 

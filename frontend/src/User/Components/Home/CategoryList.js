@@ -5,11 +5,11 @@ import { useNavigate } from "react-router-dom";
 const CategoryList = () => {
   const [categories, setCategories] = useState([]);
   const navigate = useNavigate();
-
+  const apiUrl = process.env.REACT_APP_API_URL || "http://localhost:5000";
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await axios.get("/api/category/form");
+        const response = await axios.get(`${apiUrl}/api/category/form`);
         setCategories(response.data);
       } catch (error) {
         console.error("Error fetching categories:", error);

@@ -25,6 +25,10 @@ app.use(express.json());
 app.use(express.static("uploads"));
 app.use(bodyParser.json());
 
+// Serve static files from the React app's build directory
+app.use(express.static(path.join(__dirname, "build")));
+
+// Serve images
 app.use("/images", express.static(path.join(__dirname, "uploads/images")));
 
 // Routes
@@ -39,6 +43,7 @@ app.use("/rating", ratingRoute);
 app.use("/profile", profileRoute);
 app.use("/esewa", esewaRoute);
 app.use("/api", apiRoutes);
+
 // Create a route to search items
 app.get("/search", async (req, res) => {
   const query = req.query.q;
@@ -53,6 +58,12 @@ app.get("/search", async (req, res) => {
   } catch (err) {
     res.status(500).send(err);
   }
+});
+
+// The catch-all handler: for any request that doesn't match an API route,
+// send back React's index.html file
+app.get("/*", (req, res) => {
+  res.sendFile(path.join(__dirname, "build", "index.html"));
 });
 
 mongoose

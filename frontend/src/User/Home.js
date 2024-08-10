@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import "react-toastify/dist/ReactToastify.css";
 import { UseAuthContext } from "./hooks/useauthcontext";
-
+import { Helmet } from "react-helmet";
 import CategorySelect from "./Components/CategorySelect";
 import ProductCard from "./Components/Home/ProductCard";
 import ProductSlider from "./Components/Home/ProductSlider";
@@ -16,7 +16,7 @@ const Home = () => {
   const [error, setError] = useState(null);
 
   // Use the correct environment variable
-  const apiUrl = process.env.API_URL || "http://localhost:5000"; // Default for development
+  const apiUrl = process.env.REACT_APP_API_URL || "http://localhost:5000"; // Default for development
 
   useEffect(() => {
     const getUserData = async () => {
@@ -55,6 +55,9 @@ const Home = () => {
 
   return (
     <div className="h-fit flex-col px-4 py-2">
+      <Helmet>
+        <title>Zebra</title>
+      </Helmet>
       {error && <p className="text-red-500">{error}</p>}
       {userData && <p>Welcome, {userData.email}</p>}
       <div className="hero-section grid grid-cols-10 gap-2">
