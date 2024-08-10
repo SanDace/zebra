@@ -60,14 +60,11 @@ const Home = () => {
       </Helmet>
       {error && <p className="text-red-500">{error}</p>}
       {userData && <p>Welcome, {userData.email}</p>}
-      <div className="hero-section grid grid-cols-10 gap-2">
-        <div className="col-span-2 border-2 md:hidden">
-          <CategorySelect />
-        </div>
-        <div className="hidden md:grid md:col-span-2 rounded-lg border shadow-sm">
+      <div className="hero-section grid grid-cols-1 sm:grid-cols-2 md:grid-cols-8 lg:grid-cols-10 gap-2">
+        <div className="hidden md:block md:col-span-2 rounded-lg border shadow-sm">
           <CategoryList />
         </div>
-        <div className="col-span-8 rounded-lg border shadow-sm">
+        <div className="col-span-1 sm:col-span-2 md:col-span-6 lg:col-span-8 rounded-lg border shadow-sm">
           <ProductSlider />
         </div>
       </div>

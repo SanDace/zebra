@@ -51,35 +51,39 @@ const ProductCard = () => {
   }
 
   return (
-    <div className="container py-6">
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+    <div className="container mx-auto py-6 px-4">
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
         {products.map((item) => (
           <Link
             key={item._id}
             to={`/products/${item._id}`}
-            className="group block border rounded-md shadow-md overflow-hidden hover:shadow-lg"
+            className="group block border rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300"
           >
             <div className="relative w-full pb-[66.67%] overflow-hidden">
-              {" "}
               {/* Maintains a 3:2 aspect ratio */}
               <img
                 src={`${apiUrl}/images/${item.photo}`}
                 alt={item.name}
-                className="absolute top-0 left-0 w-full h-full object-cover transition-transform duration-200 group-hover:scale-110"
+                className="absolute top-0 left-0 w-full h-full object-cover transition-transform duration-200 group-hover:scale-105 "
               />
             </div>
-            <div className="p-2">
-              <h2 className="text-sm font-semibold mb-2">{item.name}</h2>
-              <p className="text-gray-600">
+            <div className="p-4">
+              <h2 className="text-sm font-semibold text-gray-800 mb-1 line-clamp-2 group-hover:text-indigo-600 transition-colors duration-300">
+                {item.name}
+              </h2>
+              <p className="text-gray-600 group-hover:text-indigo-500 transition-colors duration-300">
                 ${item.price ? item.price.toFixed(1) : "N/A"}
               </p>
             </div>
-            <div className="relative bottom-0 flex items-center px-2">
+            <div className="flex items-center fixed justify-between  bg-gray-100">
               <ShowCardRating
-                className=" absolute bottom-0"
+                className="text-yellow-500"
                 productId={item._id}
                 size="small"
               />
+              {/*  <button className="bg-indigo-500 text-white text-xs px-2 py-1 rounded-full hover:bg-indigo-800 transition-colors duration-300">
+                Buy
+              </button> */}
             </div>
           </Link>
         ))}
