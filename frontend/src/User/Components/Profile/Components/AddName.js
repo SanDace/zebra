@@ -10,12 +10,13 @@ const AddName = () => {
   const [message, setMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [isUpdating, setIsUpdating] = useState(false); // State to manage update form display
+  const apiUrl = process.env.REACT_APP_API_URL || "http://localhost:5000"; // Default for development
 
   useEffect(() => {
     const fetchProfile = async () => {
       setIsLoading(true);
       try {
-        const response = await axios.get("/profile/getUserName", {
+        const response = await axios.get(`${apiUrl}/profile/getUserName`, {
           headers: {
             Authorization: `Bearer ${user.token}`,
           },
@@ -53,7 +54,7 @@ const AddName = () => {
 
     setIsLoading(true);
     try {
-      const endpoint = isUpdating ? "/profile/updateName" : "/profile/addName";
+      const endpoint = isUpdating ? `${apiUrl}/profile/updateName` : `${apiUrl}/profile/addName`;
       const response = await axios.post(
         endpoint,
         { name: updatedName },

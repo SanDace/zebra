@@ -6,6 +6,7 @@ import { faStar } from "@fortawesome/free-solid-svg-icons";
 const ShowCardRating = ({ productId, ratingsUpdated }) => {
   const [averageRating, setAverageRating] = useState(0);
   const [ratingsCount, setRatingsCount] = useState(0);
+  const apiUrl = process.env.REACT_APP_API_URL  // Default for development
 
   useEffect(() => {
     fetchAverageRating();
@@ -13,7 +14,7 @@ const ShowCardRating = ({ productId, ratingsUpdated }) => {
 
   const fetchAverageRating = async () => {
     try {
-      const response = await axios.get(`/rating/${productId}`);
+      const response = await axios.get(`${apiUrl}/rating/${productId}`);
       const ratings = response.data.ratings;
 
       if (ratings.length > 0) {

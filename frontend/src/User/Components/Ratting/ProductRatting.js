@@ -12,6 +12,7 @@ const ProductRating = ({ productId, userId, onRatingUpdate }) => {
   const [canRate, setCanRate] = useState(false); // State to determine if user can rate
   const [isLoading, setIsLoading] = useState(true); // State to track loading status
   const [isSubmitting, setIsSubmitting] = useState(false); // State to track submission status
+  const apiUrl = process.env.REACT_APP_API_URL || "http://localhost:5000"; // Default for development
 
   useEffect(() => {
     checkPurchaseStatus();
@@ -30,7 +31,7 @@ const ProductRating = ({ productId, userId, onRatingUpdate }) => {
   const fetchUserRating = async () => {
     try {
       const response = await axios.get(
-        `/rating/get/${productId}?userId=${userId}`
+        `${apiUrl}/rating/get/${productId}?userId=${userId}`
       );
       if (response.data.rating) {
         setUserRating(response.data.rating);
@@ -45,7 +46,7 @@ const ProductRating = ({ productId, userId, onRatingUpdate }) => {
   const checkPurchaseStatus = async () => {
     try {
       const response = await axios.get(
-        `/api/purchase/check/${productId}/${userId}`
+        `${apiUrl}/api/purchase/check/${productId}/${userId}`
       );
       console.log(response.data);
       if (response.data.payment) {

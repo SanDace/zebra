@@ -5,12 +5,14 @@ import { FaSearch } from "react-icons/fa";
 
 const SearchBar = ({ query, setQuery, clearQuery }) => {
   const navigate = useNavigate();
+  const apiUrl = process.env.REACT_APP_API_URL 
+
 
   const handleSearch = async (e) => {
     e.preventDefault();
     if (query.trim() !== "") {
       try {
-        const response = await axios.get(`/api/products`, {
+        const response = await axios.get(`${apiUrl}/api/products`, {
           params: {
             search: query,
           },

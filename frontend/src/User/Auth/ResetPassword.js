@@ -12,6 +12,7 @@ const ResetPassword = () => {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [formSubmitted, setFormSubmitted] = useState(false); // New state to track form submission
   const { token } = useParams();
+  const apiUrl = process.env.REACT_APP_API_URL || "http://localhost:5000"; // Default for development
 
   // Function to check password strength
   const isStrongPassword = (password) => {
@@ -46,7 +47,7 @@ const ResetPassword = () => {
           "Password must be at least 8 characters long and contain at least one lowercase letter, one uppercase letter, one number, and one special character."
         );
       } else {
-        const response = await axios.post("/auth/reset-password", {
+        const response = await axios.post(`${apiUrl}/auth/reset-password`, {
           newPassword,
           token,
         });

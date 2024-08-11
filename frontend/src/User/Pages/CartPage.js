@@ -12,6 +12,7 @@ const CartPage = () => {
   const [isEmpty, setIsEmpty] = useState(false);
   const { user } = UseAuthContext();
   const userId = user.user._id;
+  const apiUrl = process.env.REACT_APP_API_URL;
 
   const {
     state: cartState,
@@ -26,7 +27,7 @@ const CartPage = () => {
   useEffect(() => {
     const fetchCart = async () => {
       try {
-        const response = await axios.get(`/api/cart/${userId}`);
+        const response = await axios.get(`${apiUrl}/api/cart/${userId}`);
         cartDispatch({ type: "SET_CART", payload: response.data });
         setIsEmpty(response.data.items.length === 0);
       } catch (error) {
@@ -41,7 +42,7 @@ const CartPage = () => {
 
   const removeFromCart = async (productId) => {
     try {
-      await axios.delete("/api/cart/remove", {
+      await axios.delete(`${apiUrl}/api/cart/remove`, {
         data: { userId, productId },
       });
 
@@ -59,7 +60,7 @@ const CartPage = () => {
   const handleQuantityChange = async (productId, newQuantity) => {
     try {
       // Make an API call to update the quantity in the backend
-      const response = await axios.put("/api/cart/updateQuantity", {
+      const response = await axios.put(`${apiUrl}/api/cart/updateQuantity`, {
         userId,
         productId,
         newQuantity,
@@ -117,7 +118,7 @@ const CartPage = () => {
                           <div className="flex items-center">
                             <Link to={`/products/${item.product._id}`}>
                               <img
-                                src={`/images/${item.product.photo}`}
+                                src={`${apiUrl}/images/${item.product.photo}`}
                                 alt={item.product.name}
                                 className="w-20 h-20 object-cover mr-4 sm:w-24 sm:h-24"
                               />

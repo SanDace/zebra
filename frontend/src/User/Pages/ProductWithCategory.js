@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useParams ,Link} from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import CategorySelect from "../Components/CategorySelect";
 
 const ProductWithCategory = () => {
@@ -10,6 +10,7 @@ const ProductWithCategory = () => {
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedCategoryId, setSelectedCategoryId] = useState("");
+  const apiUrl = process.env.REACT_APP_API_URL;
 
   useEffect(() => {
     setLoading(true); // Set loading to true when fetching data
@@ -36,7 +37,7 @@ const ProductWithCategory = () => {
   useEffect(() => {
     setLoading(true); // Set loading to true when fetching data
     axios
-      .get(`/category/${categoryId}`)
+      .get(`${apiUrl}/category/${categoryId}`)
       .then((response) => {
         setSelectedCategoryId(response.data._id);
         setLoading(false); // Set loading to false when data is fetched

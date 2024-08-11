@@ -10,12 +10,13 @@ const AddPhoto = () => {
   const [isUpdating, setIsUpdating] = useState(false); // State to manage update mode
   const [loading, setLoading] = useState(false); // State to manage loading
   const { user } = UseAuthContext();
+  const apiUrl = process.env.REACT_APP_API_URL ; // Default for development
 
   useEffect(() => {
     const fetchProfile = async () => {
       setLoading(true);
       try {
-        const response = await axios.get("/profile/getProfile", {
+        const response = await axios.get(`${apiUrl}/profile/getProfile`, {
           headers: {
             Authorization: `Bearer ${user.token}`,
           },
@@ -63,8 +64,8 @@ const AddPhoto = () => {
 
     try {
       const endpoint = isUpdating
-        ? "/profile/updatePhoto"
-        : "/profile/uploadPhoto";
+        ? `${apiUrl}/profile/updatePhoto`
+        : `${apiUrl}/profile/uploadPhoto`;
       const response = await axios.post(endpoint, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
@@ -92,7 +93,7 @@ const AddPhoto = () => {
 
     setLoading(true);
     try {
-      await axios.delete("/profile/removePhoto", {
+      await axios.delete(`${apiUrl}/profile/removePhoto`, {
         headers: {
           Authorization: `Bearer ${user.token}`,
         },
@@ -121,7 +122,7 @@ const AddPhoto = () => {
           {!isUpdating && photo ? (
             <div className="text-center">
               <img
-                src={`/profileImages/${photo}`}
+                src={`${apiUrl}/profileImages/${photo}`}
                 alt="Profile"
                 className="mb-4 w-[150px] h-[150px] border shadow-lg object-contain rounded-full mx-auto"
               />
@@ -142,7 +143,7 @@ const AddPhoto = () => {
             <form onSubmit={handleSubmit} className="space-y-4">
               {photo && (
                 <img
-                  src={`/profileImages/${photo}`}
+                  src={`${apiUrl}/profileImages/${photo}`}
                   alt="Profile"
                   className="mb-4 w-[150px] h-[150px] border shadow-lg object-contain rounded-full mx-auto"
                 />

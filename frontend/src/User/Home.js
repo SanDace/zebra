@@ -45,21 +45,21 @@ const Home = () => {
     }
   }, [user, apiUrl]); // Include apiUrl as a dependency
 
-  if (loading) {
+  /* if (loading) {
     return (
       <div className="flex w-[100px] mx-auto align-center mt-[20%]">
         <img src="/pikachu.gif" alt="Pikachu" className="w-[70px]" />
       </div>
     );
-  }
+  } */
 
   return (
     <div className="h-fit flex-col px-4 py-2">
       <Helmet>
         <title>Zebra</title>
       </Helmet>
-      {error && <p className="text-red-500">{error}</p>}
-      {userData && <p>Welcome, {userData.email}</p>}
+      {/* {error && <p className="text-red-500">{error}</p>} */}
+      {/* {userData && <p>Welcome, {userData.email}</p>} */}
       <div className="hero-section grid grid-cols-1 sm:grid-cols-2 md:grid-cols-8 lg:grid-cols-10 gap-2">
         <div className="hidden md:block md:col-span-2 rounded-lg border shadow-sm">
           <CategoryList />

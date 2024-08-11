@@ -38,7 +38,7 @@ const ProductCard = () => {
     return <p>Error: {error} </p>;
   }
 
-  if (!isDataFetched) {
+  /*  if (!isDataFetched) {
     return (
       <div className="flex items-center bg-white z-30 justify-center w-full h-screen absolute top-20 right-0.5">
         <img
@@ -48,7 +48,7 @@ const ProductCard = () => {
         />
       </div>
     );
-  }
+  } */
 
   return (
     <div className="container mx-auto py-6 px-4">
@@ -75,15 +75,12 @@ const ProductCard = () => {
                 ${item.price ? item.price.toFixed(1) : "N/A"}
               </p>
             </div>
-            <div className="flex items-center fixed justify-between  bg-gray-100">
+            <div className="flex items-center  justify-between  bg-gray-100">
               <ShowCardRating
                 className="text-yellow-500"
                 productId={item._id}
                 size="small"
               />
-              {/*  <button className="bg-indigo-500 text-white text-xs px-2 py-1 rounded-full hover:bg-indigo-800 transition-colors duration-300">
-                Buy
-              </button> */}
             </div>
           </Link>
         ))}

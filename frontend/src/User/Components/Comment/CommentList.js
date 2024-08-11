@@ -14,11 +14,12 @@ const CommentList = ({ user_id, product_id, reload }) => {
   const [showComments, setShowComments] = useState(false);
   const replyFormRefs = useRef({});
   const [loadReplies, setLoadReplies] = useState(false);
+  const apiUrl = process.env.REACT_APP_API_URL || "http://localhost:5000"; // Default for development
 
   useEffect(() => {
     const fetchComments = async () => {
       try {
-        const response = await axios.get(`/comment/${product_id}`);
+        const response = await axios.get(`${apiUrl}/comment/${product_id}`);
         dispatch({ type: "SET_COMMENTS", payload: response.data });
       } catch (error) {
         console.error("Error fetching comments:", error);
@@ -37,7 +38,7 @@ const CommentList = ({ user_id, product_id, reload }) => {
   const handleReplySubmit = async (parentCommentId) => {
     setLoadReplies(true);
     try {
-      const response = await axios.post(`/comment/reply/${parentCommentId}`, {
+      const response = await axios.post(`${apiUrl}/comment/reply/${parentCommentId}`, {
         text: replyTexts[parentCommentId] || "",
         user_id,
       });
@@ -75,7 +76,7 @@ const CommentList = ({ user_id, product_id, reload }) => {
 
   const handleDeleteComment = async (commentId) => {
     try {
-      const response = await axios.delete(`/comment/delete/${commentId}`, {
+      const response = await axios.delete(`${apiUrl}/comment/delete/${commentId}`, {
         data: { user_id }, // Send user_id in the request body
       });
       if (response.status === 200) {
@@ -92,7 +93,7 @@ const CommentList = ({ user_id, product_id, reload }) => {
 
   const handleDeleteReply = async (parentCommentId, replyId) => {
     try {
-      const response = await axios.delete(`/comment/reply/delete/${replyId}`, {
+      const response = await axios.delete(`${apiUrl}/comment/reply/delete/${replyId}`, {
         data: { user_id }, // Ensure user_id is passed correctly if required
       });
       if (response.status === 200) {

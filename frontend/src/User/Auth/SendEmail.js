@@ -9,6 +9,7 @@ const SendEmail = () => {
   const [successMessage, setSuccessMessage] = useState("");
   const [loading, setLoading] = useState(false); // New state variable for loading
   const [emailSent, setEmailSent] = useState(false); // State variable to track if email has been sent successfully
+  const apiUrl = process.env.REACT_APP_API_URL || "http://localhost:5000"; // Default for development
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -18,7 +19,7 @@ const SendEmail = () => {
 
     try {
       // Check if the email exists in the database and send reset email
-      const response = await axios.post("/auth/send-reset-email", { email });
+      const response = await axios.post(`${apiUrl}/auth/send-reset-email`, { email });
       setSuccessMessage(response.data.message);
       setErrorMessage("");
       setEmailSent(true); // Set emailSent to true when email is sent successfully

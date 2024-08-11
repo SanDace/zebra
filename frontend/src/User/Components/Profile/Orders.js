@@ -15,11 +15,12 @@ const Orders = () => {
   const [limit] = useState(1); // Number of orders per page
   const userId = user.user._id; // Replace this with the actual user ID
   const [previewOrder, setPreviewOrder] = useState(null);
+  const apiUrl = process.env.REACT_APP_API_URL // Default for development
 
   useEffect(() => {
     const fetchOrders = async () => {
       try {
-        const response = await axios.get(`/api/orders/${userId}`, {
+        const response = await axios.get(`${apiUrl}/api/orders/${userId}`, {
           params: { page, limit },
         });
         setOrders(response.data.orders || []); // Ensure orders is an array

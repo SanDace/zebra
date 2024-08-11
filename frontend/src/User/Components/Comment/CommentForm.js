@@ -11,13 +11,14 @@ const CommentForm = ({ product_id }) => {
   const [loading, setLoading] = useState(false);
   const [reload, setReload] = useState(false);
   const user_id = user.user._id;
+  const apiUrl = process.env.REACT_APP_API_URL || "http://localhost:5000"; // Default for development
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     setLoading(true);
     try {
-      const response = await axios.post("/comment/create", {
+      const response = await axios.post(`${apiUrl}/comment/create`, {
         text,
         user_id,
         product_id,

@@ -21,11 +21,12 @@ const Navbar = () => {
   const [query, setQuery] = useState("");
   const shouldHideNavbar = navbarPaths.includes(location.pathname);
   const dropdownRef = useRef(null);
+  const apiUrl = process.env.REACT_APP_API_URL  // Default for development
 
   useEffect(() => {
     const fetchSearchData = async () => {
       try {
-        const response = await axios.get(`/api/products`);
+        const response = await axios.get(`${apiUrl}/api/products`);
         const searchData = await response.data;
         setSearchData(searchData);
       } catch (error) {

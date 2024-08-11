@@ -25,7 +25,6 @@ const ProductDetails = () => {
   const [showModal, setShowModal] = useState(false);
   const [ratingsUpdated, setRatingsUpdated] = useState(false);
 
-
   const apiUrl = process.env.REACT_APP_API_URL || "http://localhost:5000";
 
   useEffect(() => {

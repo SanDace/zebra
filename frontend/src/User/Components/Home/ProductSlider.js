@@ -10,7 +10,7 @@ const ProductSlider = ({ currentPage }) => {
   const [products, setProducts] = useState([]);
   const [isDataFetched, setIsDataFetched] = useState(false);
   const [error, setError] = useState(null);
-  const apiUrl = process.env.REACT_APP_API_URL || "http://localhost:5000"; // Default for development
+  const apiUrl = process.env.REACT_APP_API_URL  // Default for development
   console.log("API URL:", apiUrl);
 
   useEffect(() => {
@@ -61,7 +61,15 @@ const ProductSlider = ({ currentPage }) => {
   }, [isDataFetched, products]);
 
   if (!isDataFetched) {
-    return <div>Loading...</div>;
+    return (
+      <div className="flex items-center bg-white z-30 justify-center w-full h-screen absolute  right-0.5">
+        <img
+          src="/pikachu.gif"
+          alt="Pikachu"
+          className="w-20 h-20 object-contain mb-16"
+        />
+      </div>
+    );
   }
 
   if (error) {
@@ -75,7 +83,7 @@ const ProductSlider = ({ currentPage }) => {
           <div className="swiper-slide  " key={product._id}>
             <img
               // src={`/images/${product.photo}`}
-              src={`${apiUrl}/images/${product.photo}`} 
+              src={`${apiUrl}/images/${product.photo}`}
               alt={product.name}
               className=" object-cover w-full h-[350px] transition-transform duration-[150ms]"
             />

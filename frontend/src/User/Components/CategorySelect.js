@@ -6,11 +6,12 @@ import { useNavigate } from "react-router-dom";
 const CategorySelect = ({ selectedCategoryId }) => {
   const [categories, setCategories] = useState([]);
   const navigate = useNavigate();
+  const apiUrl = process.env.REACT_APP_API_URL  // Default for development
 
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await axios.get("/api/category/form");
+        const response = await axios.get(`${apiUrl}/api/category/form`);
         setCategories(response.data);
       } catch (error) {
         console.error("Error fetching categories:", error);
@@ -21,7 +22,7 @@ const CategorySelect = ({ selectedCategoryId }) => {
 
   const handleCategoryChange = (e) => {
     const selectedCategoryId = e.target.value;
-    navigate(`/products/category/${selectedCategoryId}`);
+    navigate(`${apiUrl}/products/category/${selectedCategoryId}`);
   };
 
   return (

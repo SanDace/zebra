@@ -15,6 +15,8 @@ const ChangePassword = () => {
     newPasswordStrength: "", // State to handle password strength message
     server: "",
   });
+  const apiUrl = process.env.REACT_APP_API_URL; // Default for development
+
   const [loading, setLoading] = useState(false);
   const [showCurrentPassword, setShowCurrentPassword] = useState(false);
   const [showNewPassword, setShowNewPassword] = useState(false);
@@ -80,7 +82,7 @@ const ChangePassword = () => {
     setLoading(true);
     try {
       await axios.post(
-        "/profile/changePassword",
+        `${apiUrl}/profile/changePassword`,
         { currentPassword, newPassword },
         {
           // Assuming user.token is properly set in context or props
