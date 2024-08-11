@@ -15,7 +15,7 @@ const ProductWithCategory = () => {
   useEffect(() => {
     setLoading(true); // Set loading to true when fetching data
     axios
-      .get(`/api/products/category/${categoryId}`)
+      .get(`${apiUrl}/api/products/category/${categoryId}`)
       .then((response) => {
         setProducts(response.data);
         setLoading(false); // Set loading to false when data is fetched
@@ -81,15 +81,18 @@ const ProductWithCategory = () => {
         ) : (
           <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {filteredProducts.map((product) => (
-              <Link to={`/products/${product._id}`}>
-                <li key={product.id} className="bg-white shadow rounded p-4">
+              <li key={product._id} className="bg-white shadow rounded p-4">
+                <Link to={`/products/${product._id}`}>
                   <h3 className="text-lg font-semibold mb-2">{product.name}</h3>
                   <p className="text-gray-600 mb-2">{product.details}</p>
                   <p className="text-gray-700">{product.categoryId.name}</p>
-                  <img src={`/images/${product.photo}`} alt={product.name} />
+                  <img
+                    src={`${apiUrl}/images/${product.photo}`}
+                    alt={product.name}
+                  />
                   {/* Add more product details as needed */}
-                </li>
-              </Link>
+                </Link>
+              </li>
             ))}
           </ul>
         )}

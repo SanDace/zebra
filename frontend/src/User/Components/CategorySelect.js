@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 const CategorySelect = ({ selectedCategoryId }) => {
   const [categories, setCategories] = useState([]);
   const navigate = useNavigate();
-  const apiUrl = process.env.REACT_APP_API_URL  // Default for development
+  const apiUrl = process.env.REACT_APP_API_URL; // Default for development
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -22,7 +22,7 @@ const CategorySelect = ({ selectedCategoryId }) => {
 
   const handleCategoryChange = (e) => {
     const selectedCategoryId = e.target.value;
-    navigate(`${apiUrl}/products/category/${selectedCategoryId}`);
+    navigate(`/products/category/${selectedCategoryId}`);
   };
 
   return (
@@ -35,6 +35,7 @@ const CategorySelect = ({ selectedCategoryId }) => {
           </option>
         ))}
       </select>
+    
     </div>
   );
 };
