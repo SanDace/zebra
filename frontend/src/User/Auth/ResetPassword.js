@@ -12,7 +12,7 @@ const ResetPassword = () => {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [formSubmitted, setFormSubmitted] = useState(false); // New state to track form submission
   const { token } = useParams();
-  const apiUrl = process.env.REACT_APP_API_URL || "http://localhost:5000"; // Default for development
+  const apiUrl = process.env.REACT_APP_API_URL  // Default for development
 
   // Function to check password strength
   const isStrongPassword = (password) => {

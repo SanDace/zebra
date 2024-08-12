@@ -9,7 +9,7 @@ const SendEmail = () => {
   const [successMessage, setSuccessMessage] = useState("");
   const [loading, setLoading] = useState(false); // New state variable for loading
   const [emailSent, setEmailSent] = useState(false); // State variable to track if email has been sent successfully
-  const apiUrl = process.env.REACT_APP_API_URL || "http://localhost:5000"; // Default for development
+  const apiUrl = process.env.REACT_APP_API_URL  // Default for development
 
   const handleSubmit = async (e) => {
     e.preventDefault();
