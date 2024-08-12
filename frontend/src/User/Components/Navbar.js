@@ -2,13 +2,14 @@ import React, { useState, useEffect, useContext, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { UseLogout } from "../hooks/uselogout";
 import { UseAuthContext } from "../hooks/useauthcontext";
-import { FaBars, FaTimes, FaUserCircle } from "react-icons/fa";
+import { FaBars, FaTimes, FaUserCircle, FaCartPlus } from "react-icons/fa";
+import { RiAdminLine } from "react-icons/ri";
 import { CartContext } from "../context/CartContext";
 import navbarPaths from "./Navbarpaths";
 import SearchBar from "./SearchBar";
 import Fuse from "fuse.js";
 import axios from "axios";
-
+import { FiLogOut } from "react-icons/fi";
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
@@ -119,6 +120,7 @@ const Navbar = () => {
                 query={query}
                 setQuery={setQuery}
                 clearQuery={clearSearchQuery}
+                className="md:hidden " // Large screen search bar width
               />
               <Link
                 to="/"
@@ -131,7 +133,7 @@ const Navbar = () => {
                   to="/cart"
                   className="relative text-white block hover:bg-gray-700 px-3 py-2 rounded-md text-sm font-medium"
                 >
-                  My Cart
+                  <FaCartPlus className="text-xl" />
                   {cartCount > 0 && (
                     <span className="absolute top-0 right-0 inline-block w-4 h-4 bg-red-500 text-white text-xs font-bold text-center rounded-full">
                       {cartCount}
@@ -174,6 +176,14 @@ const Navbar = () => {
                 </div>
               )}
             </div>
+            {/* Search bar for small screens */}
+            <SearchBar
+              fuse={fuse}
+              query={query}
+              setQuery={setQuery}
+              clearQuery={clearSearchQuery}
+              className="lg:hidden w-full sm:w-64"
+            />
             <div className="flex lg:hidden">
               <button
                 onClick={toggleNavbar}
@@ -221,24 +231,51 @@ const Navbar = () => {
               Welcome
             </Link>
             {user && (
-              <Link
-                to="/cart"
-                className="relative text-white block hover:bg-gray-700 px-3 py-2 rounded-md text-base font-medium"
-              >
-                My Cart
-                {cartCount > 0 && (
-                  <span className="absolute top-0 right-0 inline-block w-4 h-4 bg-red-500 text-white text-xs font-bold text-center rounded-full">
-                    {cartCount}
+              <>
+                <Link
+                  to="/cart"
+                  className="relative text-white flex items-center hover:bg-gray-700 px-3 py-2 rounded-md text-base font-medium"
+                >
+                  <span className="inline-flex items-center">
+                    My Cart
+                    <FaCartPlus className="ml-2" />
                   </span>
-                )}
+                  {cartCount > 0 && (
+                    <span className="absolute top-0 right-0 inline-block w-4 h-4 bg-red-500 text-white text-xs font-bold text-center rounded-full">
+                      {cartCount}
+                    </span>
+                  )}
+                </Link>
+                <button
+                  className="relative text-white flex items-center hover:bg-gray-700 px-3 py-2 rounded-md text-base font-medium"
+                  onClick={openLogoutConfirm}
+                >
+                  <span className="inline-flex items-center">
+                    Logout
+                    <FiLogOut className="ml-2" />
+                  </span>
+                </button>
+              </>
+            )}
+            {user.user.role === "admin" && (
+              <Link
+                to="/admin"
+                className="relative text-white flex items-center hover:bg-gray-700 px-3 py-2 rounded-md text-base font-medium"
+              >
+                <span className="inline-flex items-center">
+                  Admin Panel
+                  <RiAdminLine className="ml-2" />
+                </span>
               </Link>
             )}
-            <SearchBar
+            {/* Search bar inside mobile menu */}
+        {/*     <SearchBar
               fuse={fuse}
               query={query}
               setQuery={setQuery}
               clearQuery={clearSearchQuery}
-            />
+              className="lg:hidden w-full sm:w-64"
+            /> */}
           </div>
         </div>
         {showLogoutConfirm && (
