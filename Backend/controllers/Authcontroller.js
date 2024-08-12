@@ -4,7 +4,6 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const nodemailer = require("nodemailer");
 const bcrypt = require("bcryptjs");
-require("dotenv").config();
 
 const createToken = (_id) => {
   return jwt.sign({ _id }, process.env.SECRET, { expiresIn: "1D" });
@@ -70,10 +69,9 @@ const sendEmail = async (req, res) => {
       },
     });
 
-    const FrontendUrl= process.env.REACT_APP_API_URL
-    const resetLink = `${FrontendUrl}/${token}`;
+    const resetLink = `"https://ecommerce-backend-rwsg.onrender.com"/reset-password/${token}`;
     const mailOptions = {
-      from: "Zebra@gmail.com", // Sender address
+      from: "ecommerse1111@gmail.com", // Sender address
       to: email, // Receiver address
       subject: "Password Reset", // Subject line
       html: `
