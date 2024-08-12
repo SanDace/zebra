@@ -69,7 +69,7 @@ const sendEmail = async (req, res) => {
       },
     });
 
-    const resetLink = `"https://ecommerce-backend-rwsg.onrender.com"/reset-password/${token}`;
+    const resetLink = `https://ecommerce-frontend-xrhf.onrender.com/reset-password/${token}`;
     const mailOptions = {
       from: "ecommerse1111@gmail.com", // Sender address
       to: email, // Receiver address
