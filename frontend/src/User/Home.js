@@ -64,7 +64,7 @@ const Home = () => {
         <div className="hidden md:block md:col-span-2 rounded-lg border shadow-sm">
           <CategoryList />
         </div>
-        <div className="block sm:hidden">
+        <div className="block md:hidden">
           <CategorySelect />
         </div>
 

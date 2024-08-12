@@ -4,12 +4,16 @@ import { UseLogout } from "../hooks/uselogout";
 import { UseAuthContext } from "../hooks/useauthcontext";
 import { FaBars, FaTimes, FaUserCircle, FaCartPlus } from "react-icons/fa";
 import { RiAdminLine } from "react-icons/ri";
+import { FaBoxOpen } from "react-icons/fa";
+import { BiSolidHome } from "react-icons/bi";
 import { CartContext } from "../context/CartContext";
 import navbarPaths from "./Navbarpaths";
 import SearchBar from "./SearchBar";
 import Fuse from "fuse.js";
 import axios from "axios";
 import { FiLogOut } from "react-icons/fi";
+
+import { Tooltip } from "react-tooltip";
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
@@ -108,40 +112,66 @@ const Navbar = () => {
     <div>
       <nav className="bg-gray-600">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
+          <div className="flex items-center justify-between h-16 flex-wrap">
             <div className="flex items-center">
               <Link to="/" className="text-white font-bold text-xl">
                 Zebra
               </Link>
             </div>
-            <div className=" ">
+
+            {/* Search bar for large screens */}
+            <div className="w-2/12 relative right-20 sm:w-[60%] sm:left-11 lg:block lg:w-1/2 xl:w-1/3">
               <SearchBar
                 fuse={fuse}
                 query={query}
                 setQuery={setQuery}
                 clearQuery={clearSearchQuery}
-                className=""
+                className="w-full"
               />
             </div>
+
             <div className="hidden lg:flex lg:items-center lg:space-x-4">
               <Link
                 to="/"
                 className="text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-700"
               >
-                Home
+                <BiSolidHome className="text-xl" />
               </Link>
               {user && (
-                <Link
-                  to="/cart"
-                  className="relative text-white block hover:bg-gray-700 px-3 py-2 rounded-md text-sm font-medium"
-                >
-                  <FaCartPlus className="text-xl" />
-                  {cartCount > 0 && (
-                    <span className="absolute top-0 right-0 inline-block w-4 h-4 bg-red-500 text-white text-xs font-bold text-center rounded-full">
-                      {cartCount}
-                    </span>
-                  )}
-                </Link>
+                <>
+                  <Link
+                    to="/cart"
+                    className="relative text-white block hover:bg-gray-700 px-3 py-2 rounded-md text-sm font-medium"
+                    data-tip="View Cart"
+                    data-for="cartTooltip"
+                  >
+                    <FaCartPlus className="text-xl" />
+                    {cartCount > 0 && (
+                      <span className="absolute top-0 right-0 inline-block w-4 h-4 bg-red-500 text-white text-xs font-bold text-center rounded-full">
+                        {cartCount}
+                      </span>
+                    )}
+                  </Link>
+                  <Tooltip
+                    id="cartTooltip"
+                    place="bottom"
+                    effect="solid"
+                  />
+
+                  <Link
+                    to="/profile/orders"
+                    className="relative text-white block hover:bg-gray-700 px-3 py-2 rounded-md text-sm font-medium"
+                    data-tip="View Orders"
+                    data-for="ordersTooltip"
+                  >
+                    <FaBoxOpen className="text-xl" />
+                  </Link>
+                  <Tooltip
+                    id="ordersTooltip"
+                    place="top"
+                    effect="solid"
+                  />
+                </>
               )}
               {!user ? (
                 <Link
@@ -178,12 +208,12 @@ const Navbar = () => {
                 </div>
               )}
             </div>
-            {/* Search bar for small screens */}
 
-            <div className="flex lg:hidden">
+            {/* Search bar and menu button for small screens */}
+            <div className="flex lg:hidden  items-center">
               <button
                 onClick={toggleNavbar}
-                className="text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+                className="text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white ml-4"
               >
                 {isOpen ? (
                   <FaTimes className="h-6 w-6" />
@@ -194,6 +224,7 @@ const Navbar = () => {
             </div>
           </div>
         </div>
+
         <div className={`${isOpen ? "block" : "hidden"} lg:hidden bg-gray-800`}>
           <div className="px-2 pt-2 pb-3 space-y-1">
             <Link
