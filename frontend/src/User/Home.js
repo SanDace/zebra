@@ -64,6 +64,10 @@ const Home = () => {
         <div className="hidden md:block md:col-span-2 rounded-lg border shadow-sm">
           <CategoryList />
         </div>
+        <div className="block sm:hidden">
+          <CategorySelect />
+        </div>
+
         <div className="col-span-1 sm:col-span-2 md:col-span-6 lg:col-span-8 rounded-lg border shadow-sm">
           <ProductSlider />
         </div>

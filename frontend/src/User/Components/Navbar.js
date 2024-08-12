@@ -114,7 +114,7 @@ const Navbar = () => {
                 Zebra
               </Link>
             </div>
-            <div className="w-[40%] relative left-[40px] ">
+            <div className=" ">
               <SearchBar
                 fuse={fuse}
                 query={query}
