@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faStar } from "@fortawesome/free-solid-svg-icons";
+import { faStar, faUser } from "@fortawesome/free-solid-svg-icons";
 
 const ShowCardRating = ({ productId, ratingsUpdated }) => {
   const [averageRating, setAverageRating] = useState(0);
   const [ratingsCount, setRatingsCount] = useState(0);
-  const apiUrl = process.env.REACT_APP_API_URL  // Default for development
+  const apiUrl = process.env.REACT_APP_API_URL; // Default for development
 
   useEffect(() => {
     fetchAverageRating();
@@ -44,7 +44,10 @@ const ShowCardRating = ({ productId, ratingsUpdated }) => {
       <span className="ml-2 text-xs font-semibold">
         ({averageRating.toFixed(1)}/5)&nbsp;
       </span>
-      <span className="text-xs font-semibold">{ratingsCount}</span>
+      <span className="text-xs font-semibold  ">
+        {ratingsCount}
+        <FontAwesomeIcon icon={faUser} className="pl-1" />
+      </span>
     </div>
   );
 };

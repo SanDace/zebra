@@ -21,7 +21,7 @@ const Navbar = () => {
   const [query, setQuery] = useState("");
   const shouldHideNavbar = navbarPaths.includes(location.pathname);
   const dropdownRef = useRef(null);
-  const apiUrl = process.env.REACT_APP_API_URL  // Default for development
+  const apiUrl = process.env.REACT_APP_API_URL; // Default for development
 
   useEffect(() => {
     const fetchSearchData = async () => {
@@ -203,10 +203,10 @@ const Navbar = () => {
               About
             </Link>
             <Link
-              to="/addMedia"
+              to="/login"
               className="text-white block hover:bg-gray-700 px-3 py-2 rounded-md text-base font-medium"
             >
-              Contact
+              Login
             </Link>
             <Link
               to="/movie"

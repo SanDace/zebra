@@ -21,6 +21,7 @@ const userSchema = new Schema(
     name: {
       unique: true,
       type: String,
+      required: false,
     },
     photo: {
       type: String,
@@ -43,7 +44,9 @@ userSchema.statics.signup = async function (email, password, role) {
     );
   }
 
-  const exit = await this.findOne({ email });
+  const lowerEmail = email.toLowerCase();
+
+  const exit = await this.findOne({ lowerEmail });
 
   if (exit) {
     throw Error("Email already exists");
@@ -52,7 +55,7 @@ userSchema.statics.signup = async function (email, password, role) {
   const salt = await bcrypt.genSalt(10);
   const hash = await bcrypt.hash(password, salt);
 
-  const user = await this.create({ email, password: hash, role, name });
+  const user = await this.create({ lowerEmail, password: hash, role });
 
   return user;
 };
