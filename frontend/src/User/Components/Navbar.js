@@ -114,14 +114,16 @@ const Navbar = () => {
                 Zebra
               </Link>
             </div>
-            <div className="hidden lg:flex lg:items-center lg:space-x-4">
+            <div className="w-[40%] relative left-[40px] ">
               <SearchBar
                 fuse={fuse}
                 query={query}
                 setQuery={setQuery}
                 clearQuery={clearSearchQuery}
-                className="md:hidden " // Large screen search bar width
+                className=""
               />
+            </div>
+            <div className="hidden lg:flex lg:items-center lg:space-x-4">
               <Link
                 to="/"
                 className="text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-700"
@@ -177,13 +179,7 @@ const Navbar = () => {
               )}
             </div>
             {/* Search bar for small screens */}
-            <SearchBar
-              fuse={fuse}
-              query={query}
-              setQuery={setQuery}
-              clearQuery={clearSearchQuery}
-              className="lg:hidden w-full sm:w-64"
-            />
+
             <div className="flex lg:hidden">
               <button
                 onClick={toggleNavbar}
@@ -269,7 +265,7 @@ const Navbar = () => {
               </Link>
             )}
             {/* Search bar inside mobile menu */}
-        {/*     <SearchBar
+            {/*     <SearchBar
               fuse={fuse}
               query={query}
               setQuery={setQuery}
