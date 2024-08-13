@@ -51,8 +51,8 @@ const ProductCard = () => {
   } */
 
   return (
-    <div className="container mx-auto py-6 px-4">
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 gap-6">
+    <div className="container  py-4 ">
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 gap-3">
         {products.map((item) => (
           <Link
             key={item._id}
@@ -75,7 +75,7 @@ const ProductCard = () => {
                 ${item.price ? item.price.toFixed(1) : "N/A"}
               </p>
             </div>
-            <div className="flex items-center  justify-center px-2  bg-gray-100">
+            <div className="flex items-center px-2 bg-gray-100">
               <ShowCardRating
                 className="text-yellow-500 "
                 productId={item._id}

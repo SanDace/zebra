@@ -44,7 +44,7 @@ const ShowCardRating = ({ productId, ratingsUpdated }) => {
       <span className="ml-2 text-xs font-semibold">
         ({averageRating.toFixed(1)}/5)&nbsp;
       </span>
-      <span className="text-xs font-semibold  ">
+      <span className="text-xs font-semibold pl-1  ">
         {ratingsCount}
         <FontAwesomeIcon icon={faUser} className="pl-1" />
       </span>

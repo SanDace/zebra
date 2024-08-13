@@ -152,11 +152,7 @@ const Navbar = () => {
                       </span>
                     )}
                   </Link>
-                  <Tooltip
-                    id="cartTooltip"
-                    place="bottom"
-                    effect="solid"
-                  />
+                  <Tooltip id="cartTooltip" place="bottom" effect="solid" />
 
                   <Link
                     to="/profile/orders"
@@ -166,11 +162,7 @@ const Navbar = () => {
                   >
                     <FaBoxOpen className="text-xl" />
                   </Link>
-                  <Tooltip
-                    id="ordersTooltip"
-                    place="top"
-                    effect="solid"
-                  />
+                  <Tooltip id="ordersTooltip" place="top" effect="solid" />
                 </>
               )}
               {!user ? (
@@ -284,7 +276,7 @@ const Navbar = () => {
                 </button>
               </>
             )}
-            {user.user.role === "admin" && (
+            {user && user.user.role === "admin" && (
               <Link
                 to="/admin"
                 className="relative text-white flex items-center hover:bg-gray-700 px-3 py-2 rounded-md text-base font-medium"
