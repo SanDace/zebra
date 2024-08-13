@@ -7,6 +7,7 @@ import { Helmet } from "react-helmet";
 const PaymentOptions = () => {
   const secretKey = "8gBm/:&EnhH.1/q";
   const { id } = useParams();
+  const apiUrl = process.env.REACT_APP_API_URL; // Default for development
 
   // State variables
   const [formData, setFormData] = useState({
@@ -14,8 +15,8 @@ const PaymentOptions = () => {
     tax_amount: "",
     product_service_charge: "0",
     product_delivery_charge: "0",
-    success_url: "http://localhost:3000/payment_success",
-    failure_url: "http://localhost:3000/payment_failure",
+    success_url: "https://ecommerce-frontend-xrhf.onrender.com/payment_success",
+    failure_url: "https://ecommerce-frontend-xrhf.onrender.com/payment_failure",
     signed_field_names: "total_amount,transaction_uuid,product_code",
     signature: "",
   });
@@ -24,7 +25,7 @@ const PaymentOptions = () => {
   useEffect(() => {
     const fetchPurchasedItem = async () => {
       try {
-        const response = await axios.get(`/purchaseditem/${id}`);
+        const response = await axios.get(`${apiUrl}/purchaseditem/${id}`);
         const purchasedItem = response.data;
 
         // Update formData state with fetched purchasedItem data
@@ -36,8 +37,9 @@ const PaymentOptions = () => {
           product_code: "EPAYTEST",
           product_service_charge: 0, // Replace with actual service charge if applicable
           product_delivery_charge: 0, // Replace with actual delivery charge if applicable
-          success_url: "http://localhost:3000/payment_success", // Replace with actual success URL
-          failure_url: `http://localhost:3000/payment_failure/${purchasedItem.transaction_uuid}`, // Replace with actual failure URL
+          success_url:
+            "https://ecommerce-frontend-xrhf.onrender.com/payment_success", // Replace with actual success URL
+          failure_url: `https://ecommerce-frontend-xrhf.onrender.com/payment_failure/${purchasedItem.transaction_uuid}`, // Replace with actual failure URL
           signed_field_names: "total_amount,transaction_uuid,product_code",
           signature: "", // Temporary empty signature
         };
@@ -112,8 +114,8 @@ const PaymentOptions = () => {
 
   return (
     <div className="max-w-md mx-auto bg-white shadow-lg rounded-lg overflow-hidden mt-10">
-          <Helmet>
-        <title>My Page Title</title>
+      <Helmet>
+        <title>PayMent</title>
       </Helmet>
       <div className="bg-gray-600 text-neutral-300 text-center py-3 font-bold text-lg">
         Payment Option

@@ -3,11 +3,12 @@ import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import { UseAuthContext } from "../hooks/useauthcontext";
-
+import { Link } from "react-router-dom";
 const MakeOrder = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [product, setProduct] = useState(null);
+  const [address, setAddress] = useState(null);
   const [quantity, setQuantity] = useState(1);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -29,6 +30,25 @@ const MakeOrder = () => {
 
     fetchProduct();
   }, [id]);
+
+  useEffect(() => {
+    const fetchAddress = async () => {
+      try {
+        const response = await axios.get(
+          `${apiUrl}/address/user/${user.user._id}`
+        );
+        if (response.data.length > 0) {
+          const addressData = response.data[0];
+          setAddress(addressData);
+        }
+      } catch (error) {
+        setError("Error fetching address");
+        console.error("Error fetching address:", error);
+      }
+    };
+
+    fetchAddress();
+  }, [user.user._id]);
 
   const handleEsweaClick = async () => {
     if (quantity > product.stock) {
@@ -111,12 +131,20 @@ const MakeOrder = () => {
             {(product.price * quantity).toFixed(2)}
           </p>
           <p className="text-gray-600 mb-4">All taxes included</p>
-          <button
-            onClick={handleEsweaClick}
-            className="w-full bg-blue-600 text-white py-3 rounded-lg shadow-md hover:bg-blue-700 transition duration-200"
-          >
-            Place Order
-          </button>
+
+          {address ? (
+            <button
+              onClick={handleEsweaClick}
+              className="w-full bg-blue-600 text-white py-3 rounded-lg shadow-md hover:bg-blue-700 transition duration-200"
+            >
+              Place Order
+            </button>
+          ) : (
+            <p className="text-red-500">
+              Please add an address to proceed with the order.
+              <Link to="/profile/setting/Address">Add</Link>
+            </p>
+          )}
         </div>
       </div>
     </div>

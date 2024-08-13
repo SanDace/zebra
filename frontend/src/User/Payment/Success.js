@@ -6,7 +6,8 @@ const Success = () => {
   const location = useLocation();
   const params = new URLSearchParams(location.search);
   const encodedResponse = params.get("data");
-  const apiUrl = "/esewa/complete-payment"; // Backend API endpoint
+  const apiUrl =
+    "https://ecommerce-backend-rwsg.onrender.com/esewa/complete-payment"; // Backend API endpoint
 
   const [paymentData, setPaymentData] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -40,7 +41,7 @@ const Success = () => {
     if (paymentData) {
       const timer = setTimeout(() => {
         window.location.href = "/profile/orders"; // Replace with your actual order page URL
-      }, 2000); // Redirect after 3 seconds (adjust as needed)
+      }, 1000); // Redirect after 3 seconds (adjust as needed)
 
       return () => clearTimeout(timer);
     }
