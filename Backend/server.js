@@ -19,12 +19,7 @@ const purchasedItem = require("./routes/purchasedItem");
 const requireAuth = require("./middleware/requireAuth");
 const cors = require("cors");
 
-// const corsOptions = {
-//   origin: "https://ecommerce-frontend-xrhf.onrender.com", // Replace with your frontend URL
-//   methods: "GET,POST,PUT,DELETE",
-//   allowedHeaders: "Content-Type,Authorization",
-// };
-// app.use(cors(corsOptions));
+app.use(cors());
 // Middleware
 app.use(express.json());
 app.use(express.static("uploads"));
