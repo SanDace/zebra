@@ -13,6 +13,7 @@ const Register = () => {
 
   const handleSignup = async (e) => {
     e.preventDefault();
+    console.log("handleSignup triggered");
     await signup(email, password, role);
   };
 
@@ -25,6 +26,7 @@ const Register = () => {
       <input
         className="w-full px-4 py-2 mb-4 text-lg border rounded"
         id="email"
+        name="email"
         type="text"
         onChange={(e) => setEmail(e.target.value)}
         value={email}
