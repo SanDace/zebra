@@ -19,7 +19,12 @@ const purchasedItem = require("./routes/purchasedItem");
 const requireAuth = require("./middleware/requireAuth");
 const cors = require("cors");
 
-app.use(cors());
+const corsOptions = {
+  origin: "https://ecommerce-frontend-xrhf.onrender.com", // Replace with your frontend URL
+  methods: "GET,POST,PUT,DELETE",
+  allowedHeaders: "Content-Type,Authorization",
+};
+app.use(cors(corsOptions));
 // Middleware
 app.use(express.json());
 app.use(express.static("uploads"));
@@ -63,7 +68,7 @@ app.get("/search", async (req, res) => {
 // The catch-all handler: for any request that doesn't match an API route,
 // send back React's index.html file
 app.get("/*", (req, res) => {
-  res.sendFile(path.join(__dirname, "build", "index.js"));
+  res.sendFile(path.join(__dirname, "build", "index.html"));
 });
 
 mongoose
