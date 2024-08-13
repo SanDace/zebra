@@ -64,8 +64,8 @@ userSchema.statics.login = async function (email, password) {
   if (!email || !password) {
     throw Error("All field required");
   }
-
-  const user = await this.findOne({ email });
+  const lowerEmail = email.toLowerCase();
+  const user = await this.findOne({ email:lowerEmail });
 
   if (!user) {
     throw Error(" Email Not Found");
