@@ -16,6 +16,8 @@ const AddCategory = () => {
     value: "",
     error: "",
   });
+  const apiUrl = process.env.REACT_APP_API_URL;
+
 
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(10);
@@ -23,7 +25,7 @@ const AddCategory = () => {
 
   const fetchCategories = async () => {
     try {
-      const response = await axios.get("/category", {
+      const response = await axios.get(`${apiUrl}/category`, {
         params: { search: searchQuery, page, limit },
       });
       setCategories(response.data.category);
@@ -100,7 +102,7 @@ const AddCategory = () => {
 
   const handleDeleteClick = async (id) => {
     try {
-      await axios.delete(`/category/${id}`);
+      await axios.delete(`${apiUrl}/category/${id}`);
       toast.success("Category deleted successfully");
       fetchCategories();
     } catch (error) {
@@ -143,7 +145,7 @@ const AddCategory = () => {
       }
 
       try {
-        const response = await axios.put(`/category/${id}`, {
+        const response = await axios.put(`${apiUrl}/category/${id}`, {
           [field]: editField.value,
         });
         if (response.status === 200) {

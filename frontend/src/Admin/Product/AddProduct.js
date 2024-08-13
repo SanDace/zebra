@@ -82,7 +82,11 @@ const AddProduct = () => {
       formData.append("stock", stock); // Add stock to formData
       formData.append("categoryId", categoryId);
 
-      const response = await axios.post(`${apiUrl}/products/create`, formData);
+      const response = await axios.post(
+        // `http://localhost:3001/products/create`,
+        `${apiUrl}/products/create`,
+        formData
+      );
 
       if (response.status === 201) {
         toast.success("Product Created");
