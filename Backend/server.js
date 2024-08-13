@@ -29,7 +29,7 @@ app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, "build")));
 
 // Serve images
-app.use("/images", express.static(path.join(__dirname, "uploads/images")));
+app.use("/images", express.static(path.join(__dirname, "uploads/images/")));
 
 // Routes
 app.use("/auth", userRoute);
@@ -63,7 +63,7 @@ app.get("/search", async (req, res) => {
 // The catch-all handler: for any request that doesn't match an API route,
 // send back React's index.html file
 app.get("/*", (req, res) => {
-  res.sendFile(path.join(__dirname, "build", "index.html"));
+  res.sendFile(path.join(__dirname, "build", "index.js"));
 });
 
 mongoose
