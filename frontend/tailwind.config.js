@@ -7,6 +7,9 @@ module.exports = {
         dashBg: "#dde7ed", // Example custom color
         dashHover: "#e1e5e8", // Another custom color
       },
+      screens: {
+        esm: "430px",
+      },
     },
   },
   plugins: [],

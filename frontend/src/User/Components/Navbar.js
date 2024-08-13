@@ -111,22 +111,20 @@ const Navbar = () => {
   return (
     <div>
       <nav className="bg-gray-600">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 min-w-[345px]">
           <div className="flex items-center justify-between h-16 flex-wrap">
             <div className="flex items-center">
               <Link to="/" className="text-white font-bold text-xl">
                 Zebra
               </Link>
             </div>
-
             {/* Search bar for large screens */}
-            <div className="w-2/12 relative right-20 sm:w-[60%] sm:left-11 lg:block lg:w-1/2 xl:w-1/3">
+            <div className=" w-1/4 esm:w-1/2  esm:flex-grow-0  flex-grow ml-1  ">
               <SearchBar
                 fuse={fuse}
                 query={query}
                 setQuery={setQuery}
                 clearQuery={clearSearchQuery}
-                className="w-full"
               />
             </div>
 

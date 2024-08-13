@@ -79,18 +79,42 @@ const ProductWithCategory = () => {
         ) : filteredProducts.length === 0 ? (
           <div>No products found in the selected price range.</div>
         ) : (
-          <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {filteredProducts.map((product) => (
-              <li key={product._id} className="bg-white shadow rounded p-4">
-                <Link to={`/products/${product._id}`}>
-                  <h3 className="text-lg font-semibold mb-2">{product.name}</h3>
-                  <p className="text-gray-600 mb-2">{product.details}</p>
-                  <p className="text-gray-700">{product.categoryId.name}</p>
-                  <img
-                    src={`${apiUrl}/images/${product.photo}`}
-                    alt={product.name}
-                  />
-                  {/* Add more product details as needed */}
+              <li
+                key={product._id}
+                className="bg-white shadow-md rounded-lg overflow-hidden"
+              >
+                <Link
+                  to={`/products/${product._id}`}
+                  className="block hover:shadow-lg"
+                >
+                  <div className="h-48 bg-gray-100 flex items-center justify-center  group  overflow-hidden">
+                    <img
+                      src={`${apiUrl}/images/${product.photo}`}
+                      alt={product.name}
+                      className="h-full w-full object-cover  group-hover:scale-105  transform transition duration-200"
+                    />
+                  </div>
+                  <div className="p-4">
+                    <h3 className="text-xl font-semibold text-gray-800 mb-1">
+                      {product.name}
+                    </h3>
+                    <p className="text-gray-600 mb-2 line-clamp-1">
+                      {product.details}
+                    </p>
+                    <p className="text-sm text-gray-500 mb-4">
+                      {product.categoryId.name}
+                    </p>
+                    <div className="flex items-center justify-between">
+                      <span className="text-lg font-bold text-gray-900">
+                        Rs.{product.price}
+                      </span>
+                      <button className="bg-blue-600 text-white text-sm font-medium py-2 px-4 rounded hover:bg-blue-700 transition duration-200">
+                        View Product
+                      </button>
+                    </div>
+                  </div>
                 </Link>
               </li>
             ))}
