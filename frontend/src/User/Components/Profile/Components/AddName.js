@@ -10,7 +10,7 @@ const AddName = () => {
   const [message, setMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [isUpdating, setIsUpdating] = useState(false); // State to manage update form display
-  const apiUrl = process.env.REACT_APP_API_URL || "http://localhost:5000"; // Default for development
+  const apiUrl = process.env.REACT_APP_API_URL ; // Default for development
 
   useEffect(() => {
     const fetchProfile = async () => {

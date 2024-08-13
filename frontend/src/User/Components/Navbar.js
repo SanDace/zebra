@@ -13,7 +13,7 @@ import Fuse from "fuse.js";
 import axios from "axios";
 import { FiLogOut } from "react-icons/fi";
 
-import { Tooltip } from "react-tooltip";
+import { Tooltip as ReactTooltip } from "react-tooltip";
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
@@ -132,16 +132,23 @@ const Navbar = () => {
               <Link
                 to="/"
                 className="text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-700"
+                data-tooltip-id={"home"}
+                data-tooltip-content="Home"
               >
                 <BiSolidHome className="text-xl" />
+                <ReactTooltip
+                  place={"bottom-end"}
+                  id={"home"}
+                  className="z-10  "
+                />
               </Link>
               {user && (
                 <>
                   <Link
                     to="/cart"
                     className="relative text-white block hover:bg-gray-700 px-3 py-2 rounded-md text-sm font-medium"
-                    data-tip="View Cart"
-                    data-for="cartTooltip"
+                    data-tooltip-id={"cart"}
+                    data-tooltip-content="Cart"
                   >
                     <FaCartPlus className="text-xl" />
                     {cartCount > 0 && (
@@ -150,17 +157,25 @@ const Navbar = () => {
                       </span>
                     )}
                   </Link>
-                  <Tooltip id="cartTooltip" place="bottom" effect="solid" />
+                  <ReactTooltip
+                    place={"bottom-end"}
+                    id={"cart"}
+                    className="z-10 text-sm  "
+                  />
 
                   <Link
                     to="/profile/orders"
                     className="relative text-white block hover:bg-gray-700 px-3 py-2 rounded-md text-sm font-medium"
-                    data-tip="View Orders"
-                    data-for="ordersTooltip"
+                    data-tooltip-id={"order"}
+                    data-tooltip-content="Order"
                   >
                     <FaBoxOpen className="text-xl" />
                   </Link>
-                  <Tooltip id="ordersTooltip" place="top" effect="solid" />
+                  <ReactTooltip
+                    place={"bottom-end"}
+                    id={"order"}
+                    className="z-10 text-sm  "
+                  />
                 </>
               )}
               {!user ? (
@@ -175,8 +190,15 @@ const Navbar = () => {
                   <button
                     className="text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-700"
                     onClick={toggleDropdown}
+                    data-tooltip-id={"profile"}
+                    data-tooltip-content="Profile"
                   >
                     <FaUserCircle className="h-6 w-6" />
+                    <ReactTooltip
+                      place={"bottom-end"}
+                      id={"profile"}
+                      className="z-10 text-sm  "
+                    />
                   </button>
                   {showDropdown && (
                     <div className="absolute right-0 mt-2 w-48 bg-white shadow-lg rounded-md py-2 z-50">
@@ -224,10 +246,10 @@ const Navbar = () => {
               Home
             </Link>
             <Link
-              to="/media"
+              to="/profile"
               className="text-white block hover:bg-gray-700 px-3 py-2 rounded-md text-base font-medium"
             >
-              About
+              Profile
             </Link>
             <Link
               to="/login"

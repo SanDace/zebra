@@ -14,12 +14,15 @@ const Address = () => {
   const [isProcessing, setIsProcessing] = useState(false);
   const [currentAddressId, setCurrentAddressId] = useState(null);
   const [view, setView] = useState("list"); // State to toggle between 'list' and 'form'
+  const apiUrl = process.env.REACT_APP_API_URL; // Default for development
 
   useEffect(() => {
     const fetchAddresses = async () => {
       try {
         setLoading(true);
-        const response = await axios.get(`/address/user/${user.user._id}`);
+        const response = await axios.get(
+          `${apiUrl}/address/user/${user.user._id}`
+        );
         setAddresses(response.data);
         setExist(response.data.length > 0);
       } catch (error) {
@@ -35,7 +38,7 @@ const Address = () => {
   const handleDelete = async (id) => {
     try {
       setIsProcessing(true);
-      await axios.delete(`/address/${id}`);
+      await axios.delete(`${apiUrl}/address/${id}`);
       setAddresses((prevAddresses) =>
         prevAddresses.filter((address) => address._id !== id)
       );
@@ -51,7 +54,7 @@ const Address = () => {
     setIsProcessing(true);
     const fetchAddresses = async () => {
       try {
-        const response = await axios.get(`/address/user/${user.user._id}`);
+        const response = await axios.get(`${apiUrl}/address/user/${user.user._id}`);
         setAddresses(response.data);
         setExist(response.data.length > 0);
       } catch (error) {
@@ -67,7 +70,7 @@ const Address = () => {
     // Fetch addresses to reflect the changes after updating an address
     setIsProcessing(true);
     try {
-      const response = await axios.get(`/address/user/${user.user._id}`);
+      const response = await axios.get(`${apiUrl}/address/user/${user.user._id}`);
       setAddresses(response.data);
       setExist(response.data.length > 0);
     } catch (error) {
@@ -107,43 +110,50 @@ const Address = () => {
             />
           ) : (
             <ul className="list-none">
-            {addresses.map((address) => (
-              <li
-                key={address._id}
-                className="mb-6 p-6 border border-gray-300 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300"
-              >
-                <h3 className="text-lg font-semibold text-gray-800 mb-2">Address</h3>
-                <p className="text-gray-600">
-                  <span className="font-medium">City:</span> {address.city}, <span className="font-medium">State:</span> {address.state}, <span className="font-medium">Postal Code:</span> {address.postalCode}, <span className="font-medium">Country:</span> {address.country}
-                </p>
-                <p className="text-gray-600">
-                  <span className="font-medium">Tole:</span> {address.tole}
-                </p>
-                <p className="text-gray-600">
-                  <span className="font-medium">Phone Number:</span> {address.phone}
-                </p>
-                <div className="mt-4 flex justify-end space-x-4">
-                  <button
-                    onClick={() => handleUpdateClick(address._id)}
-                    className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-300"
-                  >
-                    Update
-                  </button>
-                  <button
-                    onClick={() => handleDelete(address._id)}
-                    className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-300"
-                  >
-                    {isProcessing ? (
-                      <FaSpinner className="animate-spin h-5 w-5 ml-1 text-white" />
-                    ) : (
-                      "Delete"
-                    )}
-                  </button>
-                </div>
-              </li>
-            ))}
-          </ul>
-          
+              {addresses.map((address) => (
+                <li
+                  key={address._id}
+                  className="mb-6 p-6 border border-gray-300 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300"
+                >
+                  <h3 className="text-lg font-semibold text-gray-800 mb-2">
+                    Address
+                  </h3>
+                  <p className="text-gray-600">
+                    <span className="font-medium">City:</span> {address.city},{" "}
+                    <span className="font-medium">State:</span> {address.state},{" "}
+                    <span className="font-medium">Postal Code:</span>{" "}
+                    {address.postalCode},{" "}
+                    <span className="font-medium">Country:</span>{" "}
+                    {address.country}
+                  </p>
+                  <p className="text-gray-600">
+                    <span className="font-medium">Tole:</span> {address.tole}
+                  </p>
+                  <p className="text-gray-600">
+                    <span className="font-medium">Phone Number:</span>{" "}
+                    {address.phone}
+                  </p>
+                  <div className="mt-4 flex justify-end space-x-4">
+                    <button
+                      onClick={() => handleUpdateClick(address._id)}
+                      className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-300"
+                    >
+                      Update
+                    </button>
+                    <button
+                      onClick={() => handleDelete(address._id)}
+                      className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-300"
+                    >
+                      {isProcessing ? (
+                        <FaSpinner className="animate-spin h-5 w-5 ml-1 text-white" />
+                      ) : (
+                        "Delete"
+                      )}
+                    </button>
+                  </div>
+                </li>
+              ))}
+            </ul>
           )}
         </>
       ) : (

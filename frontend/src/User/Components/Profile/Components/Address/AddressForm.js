@@ -7,6 +7,7 @@ import { FaSpinner } from "react-icons/fa";
 const AddressForm = ({ onAddressChange }) => {
   const { user } = UseAuthContext();
   const [isAdding, setIsAdding] = useState(false);
+  const apiUrl = process.env.REACT_APP_API_URL ; // Default for development
 
   const [formData, setFormData] = useState({
     address: "",
@@ -34,11 +35,11 @@ const AddressForm = ({ onAddressChange }) => {
     try {
       if (formData._id) {
         // If _id exists, it's an update
-        await axios.put(`/address/${formData._id}`, formData);
+        await axios.put(`${apiUrl}/address/${formData._id}`, formData);
         console.log("Address updated:", formData);
       } else {
         // Otherwise, it's a new address
-        await axios.post("/address/create", formData);
+        await axios.post(`${apiUrl}/address/create`, formData);
         console.log("Address created:", formData);
       }
       setErrorMessage(""); // Clear any previous error message

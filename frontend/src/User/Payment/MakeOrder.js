@@ -13,11 +13,12 @@ const MakeOrder = () => {
   const [error, setError] = useState(null);
   const { user } = UseAuthContext();
   const userId = user?.user._id;
+  const apiUrl = process.env.REACT_APP_API_URL; // Default for development
 
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const response = await axios.get(`/api/product/${id}`);
+        const response = await axios.get(`${apiUrl}/api/product/${id}`);
         setProduct(response.data);
         setLoading(false);
       } catch (error) {
@@ -39,7 +40,7 @@ const MakeOrder = () => {
       const transaction_uuid = uuidv4();
       const totalPrice = product.price * quantity;
 
-      const response = await axios.post("/esewa/initialize-esewa", {
+      const response = await axios.post(`${apiUrl}/esewa/initialize-esewa`, {
         id: product._id,
         totalPrice: totalPrice,
         transaction_uuid: transaction_uuid,
@@ -69,10 +70,10 @@ const MakeOrder = () => {
       <div className="text-lg font-semibold mb-4">Payment Option</div>
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <div className="lg:col-span-2 bg-white shadow-md rounded-lg p-6 relative">
-          <h2 className="text-2xl font-bold mb-2">{product.name}</h2>
+          <h2 className="text-xl font-[400] mb-2">{product.name}</h2>
           {product.photo && (
             <img
-              src={`/images/${product.photo}`}
+              src={`${apiUrl}/images/${product.photo}`}
               alt={product.name}
               className="w-full h-64 object-contain mb-4 rounded-lg"
             />

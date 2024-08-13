@@ -11,7 +11,7 @@ const ProductList = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
-  const itemsPerPage = 2; // Number of products per page
+  const itemsPerPage = 10; // Number of products per page
   const [editField, setEditField] = useState({
     id: null,
     field: "",
@@ -45,14 +45,19 @@ const ProductList = () => {
   }, [currentPage, searchQuery]);
 
   const handleDeleteClick = async (id) => {
-    try {
-      await axios.delete(`/products/${id}`);
-      toast.success("Product deleted successfully");
-      fetchProducts(); // Refresh the product list after deletion
-    } catch (error) {
-      console.error("Error deleting product:", error);
-      setError("Failed to delete product. Please try again later.");
-      toast.error("Failed to delete product. Please try again later.");
+    const confirmed = window.confirm(
+      "Are you sure you want to delete this product?"
+    );
+    if (confirmed) {
+      try {
+        await axios.delete(`${apiUrl}/products/${id}`);
+        toast.success("Product deleted successfully");
+        fetchProducts(); // Refresh the product list after deletion
+      } catch (error) {
+        console.error("Error deleting product:", error);
+        setError("Failed to delete product. Please try again later.");
+        toast.error("Failed to delete product. Please try again later.");
+      }
     }
   };
 

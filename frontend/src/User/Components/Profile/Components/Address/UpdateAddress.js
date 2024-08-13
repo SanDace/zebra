@@ -17,12 +17,15 @@ const UpdateAddress = ({ onAddressUpdate }) => {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const apiUrl = process.env.REACT_APP_API_URL; // Default for development
 
   // Fetch the address for the user
   useEffect(() => {
     const fetchAddress = async () => {
       try {
-        const response = await axios.get(`/address/user/${user.user._id}`);
+        const response = await axios.get(
+          `${apiUrl}/address/user/${user.user._id}`
+        );
         if (response.data.length > 0) {
           const addressData = response.data[0];
           setAddress(addressData);
@@ -61,7 +64,7 @@ const UpdateAddress = ({ onAddressUpdate }) => {
       if (!address?._id) {
         throw new Error("Address ID is missing");
       }
-      await axios.put(`/address/${address._id}`, formData);
+      await axios.put(`${apiUrl}/address/${address._id}`, formData);
       onAddressUpdate();
       toast.success("Address updated successfully");
     } catch (error) {

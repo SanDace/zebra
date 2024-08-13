@@ -7,11 +7,14 @@ const Payments = () => {
   const [page, setPage] = useState(1);
   const [totalOrders, setTotalOrders] = useState(0);
   const [limit] = useState(1); // Number of orders per page
+  const apiUrl = process.env.REACT_APP_API_URL;
 
   useEffect(() => {
     const fetchOrders = async () => {
+      setLoading(true);
+
       try {
-        const response = await axios.get(`/api/orders`, {
+        const response = await axios.get(`${apiUrl}/api/orders`, {
           params: { page, limit },
         });
         setOrders(response.data.orders || []); // Ensure orders is an array
@@ -80,7 +83,7 @@ const Payments = () => {
                   </td>
                   <td className="py-2 px-2 border-b">
                     <img
-                      src={`/images/${order.itemDetails.photo}`}
+                      src={`${apiUrl}/images/${order.itemDetails.photo}`}
                       alt={order.itemDetails.photo}
                       className="w-20 h-20 object-cover mr-4 sm:w-24 sm:h-24"
                     />
