@@ -17,10 +17,13 @@ const ProductList = () => {
     field: "",
     value: "",
   });
+  const [loading, setLoading] = useState(false);
+  const apiUrl = process.env.REACT_APP_API_URL;
 
   const fetchProducts = async () => {
+    setLoading(true);
     try {
-      const response = await axios.get(`/products/list`, {
+      const response = await axios.get(`${apiUrl}/products/list`, {
         params: {
           page: currentPage,
           limit: itemsPerPage,
@@ -32,6 +35,8 @@ const ProductList = () => {
     } catch (error) {
       setError(error);
       console.error("Error fetching products:", error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -67,7 +72,7 @@ const ProductList = () => {
   const handleKeyPress = async (e, id, field) => {
     if (e.key === "Enter") {
       try {
-        await axios.put(`/products/${id}`, {
+        await axios.put(`${apiUrl}/products/${id}`, {
           [field]: editField.value,
         });
         toast.success("Product updated successfully");
@@ -101,6 +106,17 @@ const ProductList = () => {
     }
   };
 
+  if (loading) {
+    return (
+      <div className="flex items-center bg-white z-30 justify-center w-[81%] esm:w-[90%] h-screen absolute  bottom-[5px]">
+        <img
+          src="/pikachu.gif"
+          alt="Pikachu"
+          className="w-20 h-20 object-contain "
+        />
+      </div>
+    );
+  }
   return (
     <div className="container mx-auto p-4">
       <h1 className="text-3xl font-semibold text-center text-indigo-700 my-6">
@@ -161,7 +177,7 @@ const ProductList = () => {
                 <tr key={product._id} className="hover:bg-gray-200">
                   <td className="py-2 px-4 border-b relative">
                     <img
-                      src={`/images/${product.photo}`}
+                      src={`${apiUrl}/images/${product.photo}`}
                       alt={product.name}
                       className="w-16 h-16 object-cover"
                     />

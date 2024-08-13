@@ -7,11 +7,12 @@ import Magnifier from "../Components/Magnifier";
 const SingleProduct = () => {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
+  const apiUrl = process.env.REACT_APP_API_URL;
 
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const response = await axios.get(`/products/${id}`);
+        const response = await axios.get(`${apiUrl}/products/${id}`);
         setProduct(response.data);
       } catch (error) {
         console.error("Error fetching product:", error);
@@ -26,7 +27,7 @@ const SingleProduct = () => {
       {product && (
         <div className="bg-white shadow-lg rounded-lg p-4 flex flex-col md:flex-row">
           <div className="md:w-1/2 p-4 cursor-zoom-in">
-            <Magnifier src={`/images/${product.photo}`} />
+            <Magnifier src={`${apiUrl}/images/${product.photo}`} />
           </div>
           <div className="md:w-1/2 p-4 flex flex-col">
             <h1 className="text-2xl font-bold mb-2">{product.name}</h1>

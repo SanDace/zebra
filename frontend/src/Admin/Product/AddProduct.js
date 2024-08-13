@@ -13,11 +13,12 @@ const AddProduct = () => {
   const [categories, setCategories] = useState([]);
   const [error, setError] = useState({});
   const navigate = useNavigate();
+  const apiUrl = process.env.REACT_APP_API_URL;
 
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await axios.get("/category/form");
+        const response = await axios.get(`${apiUrl}/category/form`);
         setCategories(response.data);
         setError({});
       } catch (error) {
@@ -81,7 +82,7 @@ const AddProduct = () => {
       formData.append("stock", stock); // Add stock to formData
       formData.append("categoryId", categoryId);
 
-      const response = await axios.post("/products/create", formData);
+      const response = await axios.post(`${apiUrl}/products/create`, formData);
 
       if (response.status === 201) {
         toast.success("Product Created");

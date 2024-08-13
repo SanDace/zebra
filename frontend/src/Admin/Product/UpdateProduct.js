@@ -13,11 +13,12 @@ const UpdateProduct = () => {
   const [error, setError] = useState({});
   const navigate = useNavigate();
   const { id } = useParams();
+  const apiUrl = process.env.REACT_APP_API_URL;
 
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const response = await axios.get(`/products/${id}`);
+        const response = await axios.get(`${apiUrl}/products/${id}`);
         const product = response.data;
         setName(product.name);
         setDetails(product.details);
@@ -33,7 +34,7 @@ const UpdateProduct = () => {
 
     const fetchCategories = async () => {
       try {
-        const response = await axios.get("/category/form");
+        const response = await axios.get(`${apiUrl}/category/form`);
         setCategories(response.data);
         setError({});
       } catch (error) {
@@ -119,7 +120,7 @@ const UpdateProduct = () => {
       formData.append("price", price);
       formData.append("categoryId", categoryId);
 
-      const response = await axios.put(`/products/${id}`, formData);
+      const response = await axios.put(`${apiUrl}/products/${id}`, formData);
 
       if (response.status === 200) {
         toast.success("Product Updated");
