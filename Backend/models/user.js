@@ -32,30 +32,30 @@ const userSchema = new Schema(
 
 userSchema.statics.signup = async function (email, password, role) {
   if (!email || !password || !role) {
-    throw Error("All fields require");
+    throw Error("All fields are required.");
   }
   if (!validator.isEmail(email)) {
-    throw Error("Not a Valid Email");
+    throw Error("Not a valid email.");
   }
 
   if (!validator.isStrongPassword(password)) {
     throw Error(
-      `The Password should be at least 8 characters long and contain one uppercase letter`
+      "The password should be at least 8 characters long and contain one uppercase letter."
     );
   }
 
   const lowerEmail = email.toLowerCase();
 
-  const exit = await this.findOne({ lowerEmail });
+  const existingUser = await this.findOne({ email: lowerEmail }); // Fixed field name
 
-  if (exit) {
-    throw Error("Email already exists");
+  if (existingUser) {
+    throw Error("Email already exists.");
   }
 
   const salt = await bcrypt.genSalt(10);
   const hash = await bcrypt.hash(password, salt);
 
-  const user = await this.create({ email:lowerEmail, password: hash, role });
+  const user = await this.create({ email: lowerEmail, password: hash, role });
 
   return user;
 };

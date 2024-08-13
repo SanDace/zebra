@@ -2,18 +2,17 @@ import React, { useState } from "react";
 import { UseSignup } from "../hooks/usesign";
 import "react-toastify/dist/ReactToastify.css";
 import { Link } from "react-router-dom";
-import { FaEye, FaEyeSlash, FaSpinner } from "react-icons/fa"; // Import eye and spinner icons
+import { FaEye, FaEyeSlash, FaSpinner } from "react-icons/fa";
 
 const Register = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [role, setRole] = useState("user");
   const { signup, isLoading, error } = UseSignup();
-  const [showPassword, setShowPassword] = useState(false); // State to toggle password visibility
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleSignup = async (e) => {
     e.preventDefault();
-    console.log("handleSignup triggered");
     await signup(email, password, role);
   };
 
@@ -37,7 +36,7 @@ const Register = () => {
         <input
           className="w-full px-4 py-2 mb-4 text-lg border rounded"
           id="password"
-          type={showPassword ? "text" : "password"} // Toggle password visibility
+          type={showPassword ? "text" : "password"}
           onChange={(e) => setPassword(e.target.value)}
           value={password}
           placeholder="Password"
@@ -61,15 +60,15 @@ const Register = () => {
         <button
           type="submit"
           className="w-full py-3 text-lg bg-slate-700 hover:bg-slate-600 text-white font-semibold rounded"
-          disabled={isLoading} // Disable the button while loading
+          disabled={isLoading}
         >
           {isLoading ? (
-            <span className="flex justify-center items-center ">
+            <span className="flex justify-center items-center">
               Loading
               <FaSpinner className="animate-spin h-5 w-5 ml-1 text-white" />
             </span>
           ) : (
-            <span className="flex justify-center items-center ">Register</span>
+            <span className="flex justify-center items-center">Register</span>
           )}
         </button>
       </div>

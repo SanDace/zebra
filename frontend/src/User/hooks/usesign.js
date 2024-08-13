@@ -23,10 +23,9 @@ export const UseSignup = () => {
 
       const json = await response.json();
       if (!response.ok) {
-        setError(json.error);
+        setError(json.error || "An unknown error occurred.");
         setIsLoading(false);
-      }
-      if (response.ok) {
+      } else {
         localStorage.setItem("user", JSON.stringify(json));
 
         dispatch({ type: "LOGIN", payload: json });
