@@ -28,6 +28,26 @@ const checkPurchaseStatus = async (req, res) => {
   }
 };
 
+const getAllPayments = async (req, res) => {
+  try {
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 10;
+    const skip = (page - 1) * limit;
+
+    const totalPayment = await Payment.countDocuments();
+    const payment = await Order.find()
+      .populate("itemId")
+      .populate("userId")
+      .skip(skip)
+      .limit(limit);
+
+    res.json({ payment, totalPayment });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
 module.exports = {
   checkPurchaseStatus,
+  getAllPayments
 };

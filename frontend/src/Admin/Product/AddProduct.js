@@ -83,7 +83,7 @@ const AddProduct = () => {
       formData.append("categoryId", categoryId);
 
       const response = await axios.post(
-        // `http://localhost:3001/products/create`,
+        // `http://localhost:3001/products/create`,t
         `${apiUrl}/products/create`,
         formData
       );

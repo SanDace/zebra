@@ -41,6 +41,7 @@ router.get(
   "/purchase/check/:productId/:userId",
   paymentController.checkPurchaseStatus
 );
+router.get("/payments", paymentController.getAllPayments);
 
 // Paymentcontroller
 

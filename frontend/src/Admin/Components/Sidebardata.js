@@ -60,7 +60,7 @@ const Sidebardata = [
   },
   {
     title: "Payments",
-    path: "/admin/payment",
+    path: "/admin/payments",
     icon: <FaIcons.FaMoneyBill />,
   },
 ];

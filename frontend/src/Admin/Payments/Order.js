@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
-const Payment = () => {
-  const [payments, setOrders] = useState([]);
+const Order = () => {
+  const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
   const [page, setPage] = useState(1);
   const [totalOrders, setTotalOrders] = useState(0);
@@ -14,7 +14,7 @@ const Payment = () => {
       setLoading(true);
 
       try {
-        const response = await axios.get(`${apiUrl}/api/payments`, {
+        const response = await axios.get(`${apiUrl}/api/orders`, {
           params: { page, limit },
         });
         setOrders(response.data.orders || []); // Ensure orders is an array
@@ -61,34 +61,37 @@ const Payment = () => {
             <tr className="bg-slate-100">
               <th className="py-2 px-2 border-b">User Name</th>
               <th className="py-2 px-2 border-b">Item Name</th>
-              <th className="py-2 px-2 border-b">Amount</th>
               <th className="py-2 px-2 border-b">Image</th>
+              <th className="py-2 px-2 border-b">Total Price</th>
               <th className="py-2 px-2 border-b">Payment Method</th>
               <th className="py-2 px-2 border-b">Delivery Status</th>
+              <th className="py-2 px-2 border-b">Payment Status</th>
               <th className="py-2 px-2 border-b">Purchase Date</th>
             </tr>
           </thead>
           <tbody>
-            {payments.length > 0 ? (
-              payments.map((order) => (
+            {orders.length > 0 ? (
+              orders.map((order) => (
                 <tr key={order._id} className="hover:bg-gray-100">
                   <td className="py-2 px-2 border-b">
                     {order.userId.name ? order.userId.name : order.userId.email}
                   </td>
-                  <td className="py-2 px-2 border-b">{order.productId.name}</td>
+                  <td className="py-2 px-2 border-b">
+                    {order.itemDetails.name}
+                  </td>
                   <td className="py-2 px-2 border-b">
                     <img
-                      src={`${apiUrl}/images/${order.productId.photo}`}
-                      alt={order.productId.photo}
+                      src={`${apiUrl}/images/${order.itemDetails.photo}`}
+                      alt={order.itemDetails.photo}
                       className="w-20 h-20 object-cover mr-4 sm:w-24 sm:h-24"
                     />
                   </td>
-                  <td className="py-2 px-2 border-b">{order.amount}</td>
-                  <td className="py-2 px-2 border-b">{order.paymentGateway}</td>
+                  <td className="py-2 px-2 border-b">{order.totalPrice}</td>
+                  <td className="py-2 px-2 border-b">{order.paymentMethod}</td>
                   <td className="py-2 px-2 border-b">{order.deliveryStatus}</td>
-                  <td className="py-2 px-2 border-b">{order.status}</td>
+                  <td className="py-2 px-2 border-b">{order.paymentStatus}</td>
                   <td className="py-2 px-2 border-b">
-                    {new Date(order.paymentDate).toLocaleString()}
+                    {new Date(order.purchaseDate).toLocaleString()}
                   </td>
                 </tr>
               ))
@@ -125,4 +128,4 @@ const Payment = () => {
   );
 };
 
-export default Payment;
+export default Order;

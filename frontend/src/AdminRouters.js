@@ -11,7 +11,8 @@ import AddCategory from "./Admin/Category/AddCategory";
 import AddCategory2 from "./Admin/Category/AddCategory2";
 import { UseAuthContext } from "./User/hooks/useauthcontext";
 import NotFound from "./Error/NotFound";
-import Payments from "./Admin/Payments/Payment";
+import Order from "./Admin/Payments/Order";
+import Payment from "./Admin/Payments/Payment";
 
 const AdminRoutes = () => {
   const { user } = UseAuthContext();
@@ -39,7 +40,8 @@ const AdminRoutes = () => {
           <Route path="/products/update/:id" element={<UpdateProduct />} />
           <Route path="/discounts/create" element={<AddDiscount />} />
           <Route path="/category" element={<AddCategory />} />
-          <Route path="/orders" element={<Payments />} />
+          <Route path="/orders" element={<Order />} />
+          <Route path="/payments" element={<Payment />} />
           <Route path="/category2" element={<AddCategory2 />} />
           <Route path="*" element={<NotFound />} />
         </>
