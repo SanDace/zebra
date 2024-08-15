@@ -19,7 +19,14 @@ const purchasedItem = require("./routes/purchasedItem");
 const requireAuth = require("./middleware/requireAuth");
 const cors = require("cors");
 
-app.use(cors());
+const crosOrigin = {
+  origin: "*",
+  credential: true,
+  methods: ["GET", "POST", "PUT", "DELETE"],
+};
+
+app.options("", cros(crosOrigin));
+app.use(cors(crosOrigin));
 // Middleware
 app.use(express.json());
 app.use(bodyParser.json());
