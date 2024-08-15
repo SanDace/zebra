@@ -51,11 +51,12 @@ userSchema.statics.signup = async function (email, password, role) {
   if (existingUser) {
     throw Error("Email already exists.");
   }
+  const name = "";
 
   const salt = await bcrypt.genSalt(10);
   const hash = await bcrypt.hash(password, salt);
 
-  const user = await this.create({ email: lowerEmail, password: hash, role });
+  const user = await this.create({ email: lowerEmail, password: hash, role ,name});
 
   return user;
 };
