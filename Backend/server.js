@@ -48,7 +48,10 @@ app.use("/esewa", esewaRoute);
 app.use("/api", apiRoutes);
 
 // Create a route to search items
-
+app.use("/", (req, res) => {
+  res.json;
+  ({ message: "welcome to vercel" });
+});
 app.get("/search", async (req, res) => {
   const query = req.query.q;
   try {
