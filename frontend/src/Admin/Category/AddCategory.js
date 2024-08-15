@@ -77,7 +77,7 @@ const AddCategory = () => {
     }
 
     try {
-      const response = await axios.post("/category/create", { name });
+      const response = await axios.post(`${apiUrl}/category/create`, { name });
       if (response.status === 201) {
         toast.success("Category created successfully");
         fetchCategories();
