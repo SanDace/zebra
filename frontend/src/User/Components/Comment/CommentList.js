@@ -14,7 +14,7 @@ const CommentList = ({ user_id, product_id, reload }) => {
   const [showComments, setShowComments] = useState(false);
   const replyFormRefs = useRef({});
   const [loadReplies, setLoadReplies] = useState(false);
-  const apiUrl = process.env.REACT_APP_API_URL || "http://localhost:5000"; // Default for development
+  const apiUrl = process.env.REACT_APP_API_URL; // Default for development
 
   useEffect(() => {
     const fetchComments = async () => {
@@ -25,6 +25,7 @@ const CommentList = ({ user_id, product_id, reload }) => {
         console.error("Error fetching comments:", error);
       }
     };
+
     fetchComments();
   }, [product_id, reload, loadReplies, dispatch]);
 
@@ -38,10 +39,13 @@ const CommentList = ({ user_id, product_id, reload }) => {
   const handleReplySubmit = async (parentCommentId) => {
     setLoadReplies(true);
     try {
-      const response = await axios.post(`${apiUrl}/comment/reply/${parentCommentId}`, {
-        text: replyTexts[parentCommentId] || "",
-        user_id,
-      });
+      const response = await axios.post(
+        `${apiUrl}/comment/reply/${parentCommentId}`,
+        {
+          text: replyTexts[parentCommentId] || "",
+          user_id,
+        }
+      );
       const newReply = response.data;
       setReplyTexts((prevState) => ({
         ...prevState,
@@ -76,9 +80,12 @@ const CommentList = ({ user_id, product_id, reload }) => {
 
   const handleDeleteComment = async (commentId) => {
     try {
-      const response = await axios.delete(`${apiUrl}/comment/delete/${commentId}`, {
-        data: { user_id }, // Send user_id in the request body
-      });
+      const response = await axios.delete(
+        `${apiUrl}/comment/delete/${commentId}`,
+        {
+          data: { user_id }, // Send user_id in the request body
+        }
+      );
       if (response.status === 200) {
         // Remove the deleted comment from state
         dispatch({
@@ -93,9 +100,12 @@ const CommentList = ({ user_id, product_id, reload }) => {
 
   const handleDeleteReply = async (parentCommentId, replyId) => {
     try {
-      const response = await axios.delete(`${apiUrl}/comment/reply/delete/${replyId}`, {
-        data: { user_id }, // Ensure user_id is passed correctly if required
-      });
+      const response = await axios.delete(
+        `${apiUrl}/comment/reply/delete/${replyId}`,
+        {
+          data: { user_id }, // Ensure user_id is passed correctly if required
+        }
+      );
       if (response.status === 200) {
         // Update comments state to remove the deleted reply
         dispatch({
@@ -141,7 +151,7 @@ const CommentList = ({ user_id, product_id, reload }) => {
                   >
                     <div className="flex items-center mb-2">
                       <img
-                        src={`/profileimages/${comment.user_id.photo}`}
+                        src={`${apiUrl}/profileImages/${comment.user_id.photo}`}
                         alt={comment.user_id.name}
                         className="w-10 h-10 rounded-full mr-4"
                       />
@@ -204,7 +214,7 @@ const CommentList = ({ user_id, product_id, reload }) => {
                           <li key={reply._id} className="border-gray-200 pb-2">
                             <div className="flex items-center mb-1">
                               <img
-                                src={`/profileimages/${reply.user_id.photo}`}
+                                src={`${apiUrl}/profileImages/${reply.user_id.photo}`}
                                 alt={reply.user_id.email}
                                 className="w-10 h-10 rounded-full mr-4"
                               />

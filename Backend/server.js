@@ -29,6 +29,10 @@ app.use(express.static(path.join(__dirname, "build")));
 app.use(express.static("uploads"));
 // Serve images
 app.use("/images", express.static(path.join(__dirname, "/uploads/images/")));
+app.use(
+  "/profileImages",
+  express.static(path.join(__dirname, "/uploads/profileImages/"))
+);
 
 // Routes
 app.use("/auth", userRoute);
