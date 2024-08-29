@@ -21,7 +21,7 @@ const ProductList = () => {
   const apiUrl = process.env.REACT_APP_API_URL;
 
   const fetchProducts = async () => {
-    setLoading(true);
+   
     try {
       const response = await axios.get(`${apiUrl}/products/list`, {
         params: {

@@ -131,7 +131,7 @@ const Navbar = () => {
             <div className="hidden lg:flex lg:items-center lg:space-x-4">
               <Link
                 to="/"
-                className="text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-700"
+                className="text-white z-50 px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-700"
                 data-tooltip-id={"home"}
                 data-tooltip-content="Home"
               >
