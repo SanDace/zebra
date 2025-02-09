@@ -7,7 +7,9 @@ const ProductCard = () => {
   const [products, setProducts] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
-  const apiUrl = process.env.REACT_APP_API_URL || "http://localhost:5000";
+  const apiUrl = process.env.REACT_APP_API_URL;
+  // const apiUrl = "http://localhost:3001";
+
 
   const getAllProducts = useCallback(async () => {
     try {

@@ -14,6 +14,8 @@ const UpdateProduct = () => {
   const navigate = useNavigate();
   const { id } = useParams();
   const apiUrl = process.env.REACT_APP_API_URL;
+  // const apiUrl = "http://localhost:3001";
+
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -174,9 +176,8 @@ const UpdateProduct = () => {
             type="file"
             accept="image/*"
             onChange={(e) => handleInputChange(e, "image")}
-            className={`mt-2 block w-full px-3 py-2 border ${
-              error.image ? "border-red-500" : "border-gray-300"
-            } rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500`}
+            className={`mt-2 block w-full px-3 py-2 border ${error.image ? "border-red-500" : "border-gray-300"
+              } rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500`}
           />
           {error.image && <p className="text-sm text-red-500">{error.image}</p>}
         </div>
@@ -189,9 +190,8 @@ const UpdateProduct = () => {
             value={name}
             onChange={(e) => handleInputChange(e, "name")}
             maxLength={255}
-            className={`mt-2 block w-full px-3 py-2 border ${
-              error.name ? "border-red-500" : "border-gray-300"
-            } rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500`}
+            className={`mt-2 block w-full px-3 py-2 border ${error.name ? "border-red-500" : "border-gray-300"
+              } rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500`}
           />
           <p className="text-sm text-gray-500">{name.length}/255 characters</p>
           {error.name && <p className="text-sm text-red-500">{error.name}</p>}
@@ -204,9 +204,8 @@ const UpdateProduct = () => {
             value={details}
             onChange={(e) => handleInputChange(e, "details")}
             maxLength={1000}
-            className={`mt-2 block w-full px-3 py-2 border ${
-              error.details ? "border-red-500" : "border-gray-300"
-            } rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500`}
+            className={`mt-2 block w-full px-3 py-2 border ${error.details ? "border-red-500" : "border-gray-300"
+              } rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500`}
           />
           <p className="text-sm text-gray-500">
             {details.length}/1000 characters
@@ -224,9 +223,8 @@ const UpdateProduct = () => {
             type="number"
             value={price}
             onChange={(e) => handleInputChange(e, "price")}
-            className={`mt-2 block w-full px-3 py-2 border ${
-              error.price ? "border-red-500" : "border-gray-300"
-            } rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500`}
+            className={`mt-2 block w-full px-3 py-2 border ${error.price ? "border-red-500" : "border-gray-300"
+              } rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500`}
           />
           {error.price && <p className="text-sm text-red-500">{error.price}</p>}
         </div>

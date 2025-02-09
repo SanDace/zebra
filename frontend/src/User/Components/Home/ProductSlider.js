@@ -10,7 +10,10 @@ const ProductSlider = ({ currentPage }) => {
   const [products, setProducts] = useState([]);
   const [isDataFetched, setIsDataFetched] = useState(false);
   const [error, setError] = useState(null);
-  const apiUrl = process.env.REACT_APP_API_URL; // Default for development
+  const apiUrl = process.env.REACT_APP_API_URL;
+  // const apiUrl = "http://localhost:3001";
+
+  // Default for development
 
   useEffect(() => {
     const getAllProducts = async () => {
