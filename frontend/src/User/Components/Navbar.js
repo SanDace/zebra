@@ -1,3 +1,4 @@
+// Navbar.js
 import React, { useState, useEffect, useContext, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { UseLogout } from "../hooks/uselogout";
@@ -9,11 +10,9 @@ import { BiSolidHome } from "react-icons/bi";
 import { CartContext } from "../context/CartContext";
 import navbarPaths from "./Navbarpaths";
 import SearchBar from "./SearchBar";
-import Fuse from "fuse.js";
-import axios from "axios";
 import { FiLogOut } from "react-icons/fi";
-
 import { Tooltip as ReactTooltip } from "react-tooltip";
+
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
@@ -22,32 +21,9 @@ const Navbar = () => {
   const { logout } = UseLogout();
   const { cartCount } = useContext(CartContext);
   const location = useLocation();
-  const [searchData, setSearchData] = useState([]);
   const [query, setQuery] = useState("");
   const shouldHideNavbar = navbarPaths.includes(location.pathname);
   const dropdownRef = useRef(null);
-  const apiUrl = process.env.REACT_APP_API_URL; // Default for development
-
-  useEffect(() => {
-    const fetchSearchData = async () => {
-      try {
-        const response = await axios.get(`${apiUrl}/api/products`);
-        const searchData = await response.data;
-        setSearchData(searchData);
-      } catch (error) {
-        console.error("Error fetching search data:", error);
-      }
-    };
-
-    fetchSearchData();
-  }, []);
-
-  const fuseOptions = {
-    keys: ["title", "description"],
-    threshold: 1,
-  };
-
-  const fuse = new Fuse(searchData, fuseOptions);
 
   const handleLogout = () => {
     logout();
@@ -108,6 +84,10 @@ const Navbar = () => {
     };
   }, [showDropdown]);
 
+  if (shouldHideNavbar) {
+    return null;
+  }
+
   return (
     <div>
       <nav className="bg-gray-600">
@@ -121,7 +101,6 @@ const Navbar = () => {
             {/* Search bar for large screens */}
             <div className=" w-1/4 esm:w-1/2  esm:flex-grow-0  flex-grow ml-1  ">
               <SearchBar
-                fuse={fuse}
                 query={query}
                 setQuery={setQuery}
                 clearQuery={clearSearchQuery}
@@ -308,13 +287,12 @@ const Navbar = () => {
               </Link>
             )}
             {/* Search bar inside mobile menu */}
-            {/*     <SearchBar
-              fuse={fuse}
+            <SearchBar
               query={query}
               setQuery={setQuery}
               clearQuery={clearSearchQuery}
-              className="lg:hidden w-full sm:w-64"
-            /> */}
+              className="lg:hidden w-full sm:w-64 mt-2"
+            />
           </div>
         </div>
         {showLogoutConfirm && (

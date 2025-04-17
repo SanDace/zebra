@@ -103,7 +103,7 @@ const CartPage = () => {
                       <th className="text-left py-2 px-3 sticky top-0 bg-gray-100">
                         Total
                       </th>
-                      <th className="text-left py-2 px-3 sticky top-0 bg-gray-100">
+                      <th className=" py-2 px-3 sticky top-0 text-center bg-gray-100">
                         Actions
                       </th>
                     </tr>
@@ -152,11 +152,10 @@ const CartPage = () => {
                                 )
                               }
                               disabled={item.quantity === 1}
-                              className={`px-2 py-1 bg-gray-200 text-gray-700 rounded-md ${
-                                item.quantity === 1
-                                  ? "cursor-not-allowed"
-                                  : "cursor-pointer hover:bg-gray-300"
-                              } focus:outline-none focus:ring focus:ring-gray-400`}
+                              className={`px-2 py-1 bg-gray-200 text-gray-700 rounded-md ${item.quantity === 1
+                                ? "cursor-not-allowed"
+                                : "cursor-pointer hover:bg-gray-300"
+                                } focus:outline-none focus:ring focus:ring-gray-400`}
                             >
                               <FontAwesomeIcon icon={faMinus} />
                             </button>
@@ -184,6 +183,14 @@ const CartPage = () => {
                           >
                             Remove
                           </button>
+
+
+                          <Link
+                            to={`/makeorder/${item.product._id}`}
+                            className="inline-block text-green-700  px-4 py-2 rounded-lg hover:underline transition duration-300"
+                          >
+                            Buy Now
+                          </Link>
                         </td>
                       </tr>
                     ))}

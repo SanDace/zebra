@@ -52,20 +52,9 @@ app.use("/", (req, res) => {
   res.json;
   ({ message: "welcome to vercel" });
 });
-app.get("/search", async (req, res) => {
-  const query = req.query.q;
-  try {
-    const products = await Product.find({
-      $or: [
-        { name: { $regex: query, $options: "i" } },
-        { details: { $regex: query, $options: "i" } },
-      ],
-    });
-    res.json(products);
-  } catch (err) {
-    res.status(500).send(err);
-  }
-});
+
+
+
 
 app.get("/*", (req, res) => {
   res.sendFile(path.join(__dirname, "build", "index.js"));

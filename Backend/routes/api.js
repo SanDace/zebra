@@ -6,6 +6,10 @@ const {
   getProductsByCategory,
 } = require("../controllers/ApiController/ProductController");
 
+
+const { searchProducts } = require('../controllers/ApiController/SearchController');
+router.get('/search', searchProducts)
+
 router.get("/products", getAllProducts);
 router.get("/product/:id", getSingleProduct);
 router.get("/products/category/:categoryId", getProductsByCategory);
@@ -15,6 +19,7 @@ const {
   getCategoryById,
   getFormCategories,
 } = require("../controllers/ApiController/CategoryController");
+
 
 router.get("/category/form", getFormCategories);
 router.get("/category", getCategories);
@@ -42,6 +47,8 @@ router.get(
   paymentController.checkPurchaseStatus
 );
 router.get("/payments", paymentController.getAllPayments);
+
+
 
 // Paymentcontroller
 

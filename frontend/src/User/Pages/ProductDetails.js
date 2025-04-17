@@ -19,7 +19,7 @@ const ProductDetails = () => {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
   const { user } = UseAuthContext();
-  const user_id = user?.user._id; // Safely access user_id using optional chaining
+  const user_id = user?.user._id; 
   const navigate = useNavigate();
   const { updateCartCount } = useContext(CartContext);
   const [showModal, setShowModal] = useState(false);

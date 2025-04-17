@@ -204,9 +204,8 @@ router.post("/complete-payment", async (req, res) => {
     });
 
     // Update the purchased item status to 'completed'
-    await PurchasedItem.findByIdAndUpdate(purchasedItemData._id, {
-      $set: { paymentStatus: "completed" },
-    });
+    purchasedItemData.paymentStatus = "completed";
+    await purchasedItemData.save();
 
     // Respond with success message
     res.json({

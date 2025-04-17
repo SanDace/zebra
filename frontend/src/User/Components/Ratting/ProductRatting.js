@@ -12,7 +12,7 @@ const ProductRating = ({ productId, userId, onRatingUpdate }) => {
   const [canRate, setCanRate] = useState(false); // State to determine if user can rate
   const [isLoading, setIsLoading] = useState(true); // State to track loading status
   const [isSubmitting, setIsSubmitting] = useState(false); // State to track submission status
-  const apiUrl = process.env.REACT_APP_API_URL || "http://localhost:5000"; // Default for development
+  const apiUrl = process.env.REACT_APP_API_URL  // Default for development
 
   useEffect(() => {
     checkPurchaseStatus();
@@ -98,11 +98,10 @@ const ProductRating = ({ productId, userId, onRatingUpdate }) => {
             <button
               onClick={handleSubmit}
               disabled={rating === 0 || isSubmitting} // Disable button if no rating is selected or if submitting
-              className={`ml-2 px-4 py-2 rounded focus:outline-none ${
-                rating === 0 || isSubmitting
+              className={`ml-2 px-4 py-2 rounded focus:outline-none ${rating === 0 || isSubmitting
                   ? "bg-gray-300 cursor-not-allowed"
                   : "bg-blue-500 hover:bg-blue-600 text-white"
-              }`}
+                }`}
             >
               {isSubmitting ? (
                 <div className="flex items-center">
@@ -119,9 +118,8 @@ const ProductRating = ({ productId, userId, onRatingUpdate }) => {
             <FontAwesomeIcon
               key={value}
               icon={faStar}
-              className={`h-6 w-6 cursor-pointer ${
-                value <= rating ? "text-yellow-400" : "text-gray-300"
-              } ${userRating ? "cursor-not-allowed" : ""}`}
+              className={`h-6 w-6 cursor-pointer ${value <= rating ? "text-yellow-400" : "text-gray-300"
+                } ${userRating ? "cursor-not-allowed" : ""}`}
               onClick={() => !userRating && handleRatingChange(value)}
             />
           ))}

@@ -432,7 +432,7 @@ const updateProduct = async (req, res) => {
 
       // Send success response
       res.status(200).json({ message: "Product updated successfully" });
-    });
+    })
   } catch (error) {
     console.error("Error updating product:", error);
     res.status(500).json({ error: "Internal server error" });

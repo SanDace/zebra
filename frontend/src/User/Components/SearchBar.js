@@ -1,32 +1,20 @@
+// SearchBar.js
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 import { FaSearch } from "react-icons/fa";
 
-const SearchBar = ({ query, setQuery, clearQuery }) => {
+const SearchBar = ({ query, setQuery, clearQuery, className = "" }) => {
   const navigate = useNavigate();
-  const apiUrl = process.env.REACT_APP_API_URL;
 
-  const handleSearch = async (e) => {
+  const handleSearch = (e) => {
     e.preventDefault();
     if (query.trim() !== "") {
-      try {
-        const response = await axios.get(`${apiUrl}/api/products`, {
-          params: {
-            search: query,
-          },
-        });
-        const searchResults = response.data.products;
-        // Redirect to search results page with the search query
-        navigate(`/search?q=${query}`, { state: { searchResults } });
-      } catch (error) {
-        console.error("Error fetching search results:", error);
-      }
+      navigate(`/search?q=${query}`);
     }
   };
 
   return (
-    <form onSubmit={handleSearch} className="relative flex items-center">
+    <form onSubmit={handleSearch} className={`relative flex items-center ${className}`}>
       <input
         type="text"
         value={query}

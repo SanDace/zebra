@@ -99,7 +99,7 @@ const Orders = () => {
               <th className="py-2 px-2 border-b">Payment Status</th>
               <th className="py-2 px-2 border-b">Delivery Status</th>
               <th className="py-2 px-2 border-b">Purchase Date</th>
-              <th className="py-2 px-2 border-b">Actions</th>
+              {/* <th className="py-2 px-2 border-b">Actions</th> */}
             </tr>
           </thead>
           <tbody>
@@ -111,7 +111,7 @@ const Orders = () => {
                   </td>
                   <td className="py-2 px-2 border-b">
                     <img
-                      src={`/images/${order.itemDetails.photo}`}
+                      src={`${apiUrl}/images/${order.itemDetails.photo}`}
                       alt={order.itemDetails.photo}
                       className="w-20 h-20 object-cover mr-4 sm:w-24 sm:h-24"
                     />
@@ -123,7 +123,7 @@ const Orders = () => {
                   <td className="py-2 px-2 border-b">
                     {new Date(order.purchaseDate).toLocaleString()}
                   </td>
-                  <td className="py-2 px-2 border-b text-center">
+                  {/* <td className="py-2 px-2 border-b text-center">
                     <button onClick={() => setPreviewOrder(order)}>
                       <FaEye />
                     </button>
@@ -133,7 +133,7 @@ const Orders = () => {
                     <button onClick={() => downloadReceiptAsPdf(order)}>
                       <FaDownload /> PDF
                     </button>
-                  </td>
+                  </td> */}
                 </tr>
               ))
             ) : (
@@ -187,7 +187,7 @@ const Orders = () => {
               {new Date(previewOrder.purchaseDate).toLocaleString()}
             </p>
             <div className="flex justify-between mt-4">
-              <button
+              {/* <button
                 className="px-4 py-2 bg-blue-500 text-white rounded mr-2"
                 onClick={() => downloadReceiptAsImage(previewOrder)}
               >
@@ -204,7 +204,7 @@ const Orders = () => {
                 onClick={() => setPreviewOrder(null)}
               >
                 Close
-              </button>
+              </button> */}
             </div>
           </div>
         </div>
