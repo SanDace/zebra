@@ -79,7 +79,6 @@ import { useLocation } from "react-router-dom";
 import axios from "axios";
 
 const Success = () => {
-  const location = useLocation();
   const params = new URLSearchParams(location.search);
   const encodedResponse = params.get("data");
   const apiUrl =
@@ -149,25 +148,25 @@ const Success = () => {
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-green-50">
-      <div className="bg-white shadow-lg rounded-lg p-6 max-w-lg w-full">
-        <h1 className="text-3xl font-bold text-green-700 mb-4">Payment Success</h1>
-        <p className="text-lg text-gray-800 mb-2">
+      <div className="bg-white shadow-lg rounded-lg p-8 max-w-xl w-full">
+        <h1 className="text-3xl font-bold text-green-600 mb-6 text-center">Payment Success</h1>
+        <p className="text-xl text-gray-800 mb-4">
           <span className="font-semibold">Transaction Code:</span> {paymentData.transaction_code}
         </p>
-        <p className="text-lg text-gray-800 mb-2">
+        <p className="text-xl text-gray-800 mb-4">
           <span className="font-semibold">Status:</span> {paymentData.status}
         </p>
-        <p className="text-lg text-gray-800 mb-2">
+        <p className="text-xl text-gray-800 mb-4">
           <span className="font-semibold">Total Amount:</span> ${paymentData.amount}
         </p>
-        <p className="text-lg text-gray-800 mb-4">
+        <p className="text-xl text-gray-800 mb-6">
           <span className="font-semibold">Transaction UUID:</span> {paymentData.transaction_uuid}
         </p>
         {/* Display other relevant payment data */}
         <div className="text-center">
           <button
             onClick={() => window.location.href = "/profile/orders"}
-            className="bg-green-600 text-white py-2 px-4 rounded-md hover:bg-green-700 transition duration-300"
+            className="bg-green-600 text-white py-2 px-6 rounded-md hover:bg-green-700 transition duration-300"
           >
             View Orders
           </button>

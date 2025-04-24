@@ -15,8 +15,8 @@ const Home = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // Use the correct environment variable
-  const apiUrl = process.env.REACT_APP_API_URL || "http://localhost:3001"; // Default for development
+  // Api Assigning 
+  const apiUrl = process.env.REACT_APP_API_URL ; 
 
   useEffect(() => {
     const getUserData = async () => {
