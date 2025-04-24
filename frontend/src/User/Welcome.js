@@ -4,7 +4,7 @@ const Welcome = ({ userData }) => {
   return (
     <div>
       <p>Not authorized,</p>
-      git hub
+      git hub.
     </div>
   );
 };
