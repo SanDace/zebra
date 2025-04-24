@@ -15,8 +15,8 @@ const PaymentOptions = () => {
     tax_amount: "",
     product_service_charge: "0",
     product_delivery_charge: "0",
-    success_url: "https://ecommerce-frontend-xrhf.onrender.com/payment_success",
-    failure_url: "https://ecommerce-frontend-xrhf.onrender.com/payment_failure",
+    failure_url: "https://zebra-j6vx.onrender.com/payment_failure",
+    success_url: "https://zebra-j6vx.onrender.com/payment_success",
     signed_field_names: "total_amount,transaction_uuid,product_code",
     signature: "",
   });
