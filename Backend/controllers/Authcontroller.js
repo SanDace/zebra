@@ -9,6 +9,8 @@ const createToken = (_id) => {
   return jwt.sign({ _id }, process.env.SECRET, { expiresIn: "1D" });
 };
 
+
+// login
 const login = async (req, res) => {
   const { email, password } = req.body;
 
@@ -22,6 +24,8 @@ const login = async (req, res) => {
   }
 };
 
+// register
+
 const register = async (req, res) => {
   const { email, password, role } = req.body;
   try {
@@ -32,6 +36,8 @@ const register = async (req, res) => {
     return res.status(400).json({ error: err.message });
   }
 };
+
+
 
 // Controller function to fetch user data
 const getUserData = async (req, res) => {
@@ -68,8 +74,7 @@ const sendEmail = async (req, res) => {
         pass: "riqy bfwj wysm laxe", // Your Gmail password or app-specific password
       },
     });
-
-    const resetLink = `https://ecommerce-frontend-xrhf.onrender.com/reset-password/${token}`;
+    const resetLink = `https://zebra-backend.onrender.com/reset-password/${token}`;
     const mailOptions = {
       from: "ecommerse1111@gmail.com", // Sender address
       to: email, // Receiver address
